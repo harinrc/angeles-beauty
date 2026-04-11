@@ -1,0 +1,23 @@
+{
+  "name": "Ángeles Beauty",
+  "short_name": "AngelesB",
+  "description": "Servicios de belleza y estética profesional.",
+  "start_url": "/angeles-beauty/index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#e1306c",
+  "icons": [
+    {
+      "src": "Imagenes/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "Imagenes/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
