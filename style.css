@@ -467,3 +467,17 @@ header.header-scrolled {
 .facebook-icon:hover {
     color: #0d65d9; /* Un azul un poco más oscuro al pasar el ratón */
 }
+
+
+/* Estilo específico para el icono de TikTok */
+.tiktok-icon {
+    font-size: 17px;
+    color: #000000; /* Color negro base de TikTok */
+    transition: transform 0.3s, color 0.3s;
+}
+
+/* Efecto al pasar el mouse */
+.tiktok-icon:hover {
+    color: #ff0050; /* El color rosado/rojo de TikTok */
+    transform: scale(1.1); /* Un ligero aumento para que resalte */
+}
