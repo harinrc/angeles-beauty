@@ -102,14 +102,14 @@
       // Inicializa Cloud Firestore
       const db = getFirestore(app);
 
-      // ⭐ NUEVA CONSTANTE: Número de WhatsApp para simplificar la gestión.
+      
       const WHATSAPP_NUMBER = "50558068013"; 
       
       // --- 2. LÓGICA DE LA PÁGINA (HEADER, MENÚ Y PRODUCTOS) ---
       
       window.addEventListener('DOMContentLoaded', (event) => {
 
-          /* CÓDIGO 1: HEADER STICKY (sin cambios) */
+          
           const header = document.querySelector('header');
           if (header) { 
               window.addEventListener('scroll', function() {
@@ -121,7 +121,7 @@
               });
           }
 
-          /* CÓDIGO 2: MENÚ HAMBURGUESA (sin cambios) */
+          /* CÓDIGO 2: MENÚ HAMBURGUESA */
           const botonMenu = document.querySelector('#menu-hamburguesa');
           const menuPrincipal = document.querySelector('#menu-principal');
           if (botonMenu && menuPrincipal) {
@@ -131,7 +131,7 @@
           }
 
 
-          /* CÓDIGO 3: CARGAR PRODUCTOS DESDE FIRESTORE (MODIFICADO) */
+          /* CÓDIGO 3: CARGAR PRODUCTOS DESDE FIRESTORE  */
           
           async function cargarProductos() {
               const galeria = document.querySelector('.galeria-productos');
@@ -156,7 +156,7 @@
                       tarjeta.className = 'tarjeta-producto'; 
 
                       // ----------------------------------------------------
-                      // ⭐ ARREGLO DE WHATSAPP: Mensaje Detallado 
+                      // WHATSAPP: Mensaje Detallado 
                       // ----------------------------------------------------
 
                       // 1. Construir el mensaje con Nombre, Precio y Enlace de Imagen
@@ -164,7 +164,7 @@
                       mensaje += `Producto: ${producto.nombre}\n`;
                       mensaje += `Precio: ${producto.precio}\n\n`;
                       
-                      // Agregamos el enlace de la imagen. WhatsApp solo acepta texto/enlaces.
+                      // Agregamos el enlace de la imagen.
                       if (producto.imagenUrl) {
                           mensaje += `Presiona el enlace para ver imagen: ${producto.imagenUrl}\n\n`;
                       }
@@ -178,7 +178,7 @@
                       // 3. Crear el enlace de WhatsApp
                       const enlaceWhatsApp = `https://wa.me/${WHATSAPP_NUMBER}?text=${textoCodificado}`;
                       
-                      // --- Creación de la tarjeta (sin cambios estructurales) ---
+                      // --- Creación de la tarjeta ---
                       tarjeta.innerHTML = `
                           <img src="${producto.imagenUrl}" alt="Imagen de ${producto.nombre}">
                           <h3>${producto.nombre}</h3>
