@@ -518,6 +518,8 @@ header.header-scrolled {
     background: rgba(0, 0, 0, 0.2); /* Oscurece un poquito el fondo para que el texto se lea mejor */
     text-align: center;
     color: white;
+    padding: 20px; /* Esto evita que el texto toque los bordes del cel */
+    box-sizing: border-box; /* Esto hace que el padding no estire el contenedor */
 }
 
 
@@ -541,4 +543,10 @@ header.header-scrolled {
     background-color: #c6265d; /* Un rosa un poco más oscuro */
     transform: scale(1.05); /* Efecto de crecimiento leve */
     color: #ffffff !important;
+}
+
+
+.hero-overlay h1 {
+    color: #e1306c;
+    text-shadow: 2px 2px 4px rgba(5, 1, 3, 0.8); /* Esto crea un borde blanco suave detrás de las letras */
 }
