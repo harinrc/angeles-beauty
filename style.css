@@ -89,6 +89,16 @@ body {
     margin-top: 10px; 
     transition: background-color 0.3s ease;
 }
+
+
+h1 {
+    font-family: 'Great Vibes', cursive; /* <-- NUEVA FUENTE DEL LOGO */
+    color: #d13885;
+    margin: 0;
+    font-size: 3.5em; /* Las fuentes script necesitan ser más grandes */
+}
+
+
 /* --- 6. Estilos del Encabezado (Header) --- */
 header {
     display: flex;
@@ -557,16 +567,6 @@ header.header-scrolled {
     background: rgba(0, 0, 0, 0.3); /* Oscurece un poco para resaltar el rosa */
 }
 
-/* 2. El título adaptativo (Reemplaza tu h1 antiguo aquí) */
-.hero-overlay h1 {
-    color: #e1306c; /* Tu rosa oficial */
-    font-family: 'Great Vibes', cursive; /* O la que estés usando */
-    margin-bottom: 15px;
-    line-height: 1.1;
-    /* Tamaño base para teléfonos pequeños (320dp) */
-    font-size: 1.8rem; 
-    transition: font-size 0.3s ease;
-}
 
 /* 3. Saltos de tamaño automáticos */
 @media (min-width: 768px) {
