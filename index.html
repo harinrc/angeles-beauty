@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ángeles Beauty - Productos Exclusivos</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link rel="stylesheet" href="style.css"> 
     <link rel="manifest" href="manifest.json">
     
@@ -38,14 +39,22 @@
 
     <main>
         
-        <section id="inicio">
-            <h2>Productos de Belleza Exclusivos</h2>
-            <p>Descubre nuestra selección única para realzar tu belleza.</p>
-            
-            <a href="https://wa.me/50558068013?text=Hola...%20Vengo%20de%20tu%20página%20web,%20quiero%20más%20información%20acerca%20de%20los%20productos%20de%20Ángeles%20Beauty!!!" class="boton-whatsapp" target="_blank">
-                Contáctanos por WhatsApp
-            </a>
-        </section>
+        <section class="hero-container">
+    <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="Imagenes/Imagen de WhatsApp 2025-10-25 a las 18.50.55_6f38e7e8_pixian_ai.jpeg" alt="Belleza 1"></div>
+            <div class="swiper-slide"><img src="Imagenes/IMG-20251024-WA0024.jpg" alt="Belleza 2"></div>
+            <div class="swiper-slide"><img src="Imagenes/Imagen de WhatsApp 2025-10-26 a las 16.49.25_c7428733.jpg" alt="Belleza 3"></div>
+           
+        </div>
+    </div>
+
+    <div class="hero-overlay">
+        <h1>Productos de Belleza Exclusivos</h1>
+        <p>Descubre nuestra selección única para realzar tu belleza.</p>
+        <a href="https://wa.me/50558068013?text=Hola...%20Vengo%20de%20tu%20página%20web,%20quiero%20más%20información%20acerca%20de%20los%20productos%20de%20Ángeles%20Beauty!!!" class="btn-whatsapp">Contáctanos por WhatsApp</a>
+    </div>
+</section>
 
         <section id="productos">
             <h2>Nuestros Productos</h2>
@@ -81,7 +90,21 @@
         <p>&copy; 2026 Ángeles Beauty. Creado con ❤️.</p>
     </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        var swiper = new Swiper(".mySwiper", {
+          loop: true,
+          effect: "fade",
+          autoplay: {
+            delay: 4000,
+            disableOnInteraction: false,
+          },
+        });
+      });
+    </script>
+</body>
    <script type="module">
     
       // --- 1. INICIALIZACIÓN DE FIREBASE ---

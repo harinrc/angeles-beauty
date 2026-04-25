@@ -481,3 +481,64 @@ header.header-scrolled {
     color: #ff0050; /* El color rosado/rojo de TikTok */
     transform: scale(1.1); /* Un ligero aumento para que resalte */
 }
+
+
+.hero-container {
+    position: relative;
+    width: 100%;
+    height: 70vh; /* Ajusta la altura a tu gusto */
+    overflow: hidden;
+}
+
+/* El carrusel ocupa todo el fondo */
+.mySwiper {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.swiper-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Esto evita que las imágenes se deformen */
+}
+
+/* El texto encima de todo */
+.hero-overlay {
+    position: relative;
+    z-index: 2; /* Mayor que el del swiper para estar arriba */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2); /* Oscurece un poquito el fondo para que el texto se lea mejor */
+    text-align: center;
+    color: white;
+}
+
+
+/* Estilo del botón de WhatsApp */
+.btn-whatsapp {
+    display: inline-block;
+    padding: 12px 25px;
+    background-color: #e1306c; /* El rosa de Ángeles Beauty */
+    color: #ffffff !important; /* Forzamos el texto blanco para que no salga azul */
+    text-decoration: none; /* Quitamos la línea de link azul */
+    border-radius: 8px; /* Bordes redondeados */
+    font-weight: bold;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.2s;
+    margin-top: 15px;
+    z-index: 10; /* Nos aseguramos que esté por encima de todo */
+}
+
+/* Efecto al pasar el mouse o tocarlo */
+.btn-whatsapp:hover {
+    background-color: #c6265d; /* Un rosa un poco más oscuro */
+    transform: scale(1.05); /* Efecto de crecimiento leve */
+    color: #ffffff !important;
+}
