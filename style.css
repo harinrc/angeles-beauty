@@ -21,12 +21,7 @@ body {
     padding-top: 100px; 
 }
 
-h1 {
-    font-family: 'Great Vibes', cursive; /* <-- NUEVA FUENTE DEL LOGO */
-    color: #d13885;
-    margin: 0;
-    font-size: 3.5em; /* Las fuentes script necesitan ser más grandes */
-}
+
 
 /* --- Estilos de la Galería de Productos --- */
 
@@ -546,7 +541,42 @@ header.header-scrolled {
 }
 
 
+/* --- SECCIÓN HERO RESPONSIVA --- */
+
+/* 1. El contenedor que evita el desorden en 320dp */
+.hero-overlay {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    box-sizing: border-box; /* Evita que el padding estire la pantalla */
+    background: rgba(0, 0, 0, 0.3); /* Oscurece un poco para resaltar el rosa */
+}
+
+/* 2. El título adaptativo (Reemplaza tu h1 antiguo aquí) */
 .hero-overlay h1 {
-    color: #e1306c;
-    text-shadow: 2px 2px 4px rgba(5, 1, 3, 0.8); /* Esto crea un borde blanco suave detrás de las letras */
+    color: #e1306c; /* Tu rosa oficial */
+    font-family: 'Great Vibes', cursive; /* O la que estés usando */
+    margin-bottom: 15px;
+    line-height: 1.1;
+    /* Tamaño base para teléfonos pequeños (320dp) */
+    font-size: 1.8rem; 
+    transition: font-size 0.3s ease;
+}
+
+/* 3. Saltos de tamaño automáticos */
+@media (min-width: 768px) {
+    .hero-overlay h1 {
+        font-size: 3rem; /* Tamaño para Tablets */
+    }
+}
+
+@media (min-width: 1200px) {
+    .hero-overlay h1 {
+        font-size: 4.5rem; /* Tamaño para Computadoras */
+    }
 }
