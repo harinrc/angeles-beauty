@@ -90,6 +90,8 @@
         <p>&copy; 2026 Ángeles Beauty. Creado con ❤️.</p>
     </footer>
 
+    <button id="btnInstall" style="display:none;" class="btn-whatsapp">Instalar Aplicación</button>
+
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     <script>
@@ -104,6 +106,11 @@
         });
       });
     </script>
+    <script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js');
+  }
+</script>
 </body>
    <script type="module">
     
@@ -224,5 +231,20 @@
           cargarProductos();
 
       }); // Fin del 'DOMContentLoaded'
+
+let deferredPrompt;
+const btnInstall = document.getElementById('btnInstall');
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  // Si el navegador permite la instalación, mostramos nuestro botón
+  btnInstall.style.display = 'block';
+});
+
+btnInstall.addEventListener('click', (e) => {
+  btnInstall.style.display = 'none';
+  deferredPrompt.prompt();
+});
 
 </script>
