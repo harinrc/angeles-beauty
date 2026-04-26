@@ -22,20 +22,17 @@
 <body>
 
     <header>
-        <h1>Ángeles Beauty</h1>
-        
-        <button id="menu-hamburguesa" class="menu-hamburguesa" aria-label="Abrir menú">
-            &#9776;
-        </button>
-
-        <nav id="menu-principal">
-            <ul>
-                <li><a href="#">Inicio</a></li>
-                <li><a href="#productos">Productos</a></li>
-                <li><a href="#contacto">Contacto</a></li>
-            </ul>
-        </nav>
-    </header>
+    <h1 class="logo-texto">Ángeles Beauty</h1> <button id="menu-hamburguesa" class="menu-hamburguesa" aria-label="Abrir menú">
+        &#9776;
+    </button>
+    <nav id="menu-principal">
+        <ul>
+            <li><a href="#">Inicio</a></li>
+            <li><a href="#productos">Productos</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+        </ul>
+    </nav>
+</header>
 
     <main>
         
@@ -214,15 +211,15 @@
                       // 3. Crear el enlace de WhatsApp
                       const enlaceWhatsApp = `https://wa.me/${WHATSAPP_NUMBER}?text=${textoCodificado}`;
                       
-                      // --- Creación de la tarjeta ---
-                      tarjeta.innerHTML = `
-                          <img src="${producto.imagenUrl}" alt="Imagen de ${producto.nombre}">
-                          <h3>${producto.nombre}</h3>
-                          <p class="precio">${producto.precio}</p>
-                          <a href="${enlaceWhatsApp}" class="boton-comprar" target="_blank">
-                              Preguntar por WhatsApp
-                          </a>
-                      `;
+// --- Creación de la tarjeta (CORREGIDA) ---
+tarjeta.innerHTML = `
+    <img src="${producto.imagenUrl}" alt="Imagen de ${producto.nombre}">
+    <h3>${producto.nombre}</h3>
+    <p class="precio">${producto.precio}</p>
+    <a href="${enlaceWhatsApp}" class="btn-whatsapp" target="_blank">
+        Preguntar por WhatsApp
+    </a>
+`;
                       
                       galeria.appendChild(tarjeta);
                   });
