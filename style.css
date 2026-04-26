@@ -1,13 +1,10 @@
-/* --- 0. Importación de Fuentes (Google Fonts) --- */
+/* --- 0. Importación de Fuentes --- */
 @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;700&display=swap');
 
-/*
- * 'Great Vibes' - Para el logo
- * 'Montserrat' - Para el texto (400 = regular, 700 = bold)
-*/
-
-/* --- AHORA VIENEN TUS ESTILOS ANTIGUOS --- */
-
+/* --- 1. Estilos Globales --- */
+* {
+    box-sizing: border-box; /* Fundamental para que nada se desborde */
+}
 
 body {
     background-color: #eeeeee;
@@ -15,487 +12,75 @@ body {
     color: #333;
     margin: 0;
     padding: 0;
-    
-    /* ¡Añade esto para que el main no se esconda bajo el header! */
-    /* (Calcula la altura de tu header, aprox. 80-100px) */
-    padding-top: 100px; 
+    padding-top: 80px; /* Ajustado para el header fijo */
 }
 
-
-
-/* --- Estilos de la Galería de Productos --- */
-
-/* 1. El Contenedor Principal (El "Estante") */
-.galeria-productos {
-    display: flex; /* ¡La magia de Flexbox! */
-    flex-wrap: wrap; /* Si no caben, que salten a la línea de abajo */
-    justify-content: center; /* Centra las tarjetas horizontalmente */
-    gap: 20px; /* Un espacio de 20px entre cada tarjeta */
-    padding: 20px; /* Un espacio alrededor de toda la galería */
-}
-
-/* 2. Cada Tarjeta de Producto (La "Caja") */
-.tarjeta-producto {
-    background-color: #ffffff; /* Fondo blanco para la tarjeta */
-    border-radius: 10px; /* Esquinas redondeadas */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
-    
-    width: 300px; /* Ancho fijo para cada tarjeta */
-    
-    padding: 15px; /* Espacio *dentro* de la tarjeta */
-    text-align: center; /* Centra el texto y el botón */
-    
-    /* Efecto de transición suave (para el futuro) */
-    transition: transform 0.3s ease; 
-}
-
-/* 3. La Imagen dentro de la tarjeta */
-.tarjeta-producto img {
-    width: 100%; /* La imagen ocupa el 100% del ancho de la tarjeta */
-    height: 300px; /* Le damos una altura fija */
-    object-fit: cover; /* Recorta la imagen para que encaje perfecto sin deformarse */
-    border-radius: 5px; /* Esquinas redondeadas para la imagen */
-}
-
-/* 4. El Precio */
-.tarjeta-producto .precio {
-    font-size: 1.2em; /* Tamaño de fuente más grande (em es relativo) */
-    font-weight: bold; /* Letra en negrita */
-    color: #d13885; /* Color rosa, igual que el título */
-    margin: 10px 0; /* Espacio arriba y abajo */
-}
-
-/* --- 5. Estilos de Botones (Modificación Reforzada) --- */
-
-.boton-whatsapp,
-.boton-comprar {
-    /* Mantenemos Flexbox para el centrado general: */
-    display: flex;       
-    justify-content: center; 
-    align-items: center;     
-    
-    /* ⭐ AÑADIR/MODIFICAR ESTAS LÍNEAS PARA FIJAR EL TEXTO: ⭐ */
-    text-align: center;         /* Asegura el centrado de texto */
-    line-height: 1;             /* Elimina el espacio extra entre líneas (1 es el valor normal) */
-    white-space: nowrap;        /* IMPIDE que el texto se rompa en dos líneas */
-    
-    /* Tus estilos originales: */
-    background-color: #d13885; 
-    color: #ffffff; 
-    padding: 12px 24px; 
-    text-decoration: none; 
-    border-radius: 5px; 
-    font-weight: bold; 
-    margin-top: 10px; 
-    transition: background-color 0.3s ease;
-}
-
-
-h1 {
-    font-family: 'Great Vibes', cursive; /* <-- NUEVA FUENTE DEL LOGO */
-    color: #d13885;
-    margin: 0;
-    font-size: 3.5em; /* Las fuentes script necesitan ser más grandes */
-}
-
-
-/* --- 6. Estilos del Encabezado (Header) --- */
+/* --- 2. Header y Navegación --- */
 header {
     display: flex;
     justify-content: space-between;
-    align-items: center; 
-    padding: 20px 40px;
-    background-color: transparent; /* <-- AHORA ES TRANSPARENTE */
-    box-shadow: none; /* <-- AHORA NO TIENE SOMBRA */
-    
-    /* ¡Añade esta línea para una transición suave! */
-    transition: background-color 0.4s ease, box-shadow 0.4s ease;
-    
-    /* ¡Líneas clave para que "flote" encima de todo! */
-    position: fixed; /* Lo deja fijo en la pantalla */
+    align-items: center;
+    padding: 10px 20px;
+    background-color: transparent;
+    position: fixed;
     top: 0;
     left: 0;
-    width: 100%; /* Ocupa todo el ancho */
-    z-index: 100; /* Se asegura que esté por encima de otros elementos */
-    
-    /* Arregla el 'width' que se rompe por el padding */
-    box-sizing: border-box; 
+    width: 100%;
+    z-index: 1000;
+    transition: background-color 0.4s ease, box-shadow 0.4s ease;
 }
 
+header.header-scrolled {
+    background-color: #ffffff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
 
-/* --- 7. Estilos del Menú de Navegación --- */
+h1.logo-texto {
+    font-family: 'Great Vibes', cursive;
+    color: #d13885;
+    margin: 0;
+    font-size: clamp(2rem, 5vw, 3.5rem); /* Se adapta al tamaño de pantalla */
+}
 
 nav ul {
-    display: flex; /* ¡Flexbox otra vez! Pone los <li> en horizontal */
-    list-style-type: none; /* ¡CRUCIAL! Adiós a los puntos de la lista */
+    display: flex;
+    list-style: none;
     margin: 0;
     padding: 0;
 }
 
 nav li {
-    margin-left: 30px; /* Espacio entre cada "botón" del menú */
+    margin-left: 25px;
 }
 
 nav a {
     text-decoration: none;
     color: #333;
-    /* font-weight: bold; <-- Lo quitamos (usaremos 700 de Montserrat) */
-    font-weight: 700; /* Le decimos que use el grosor "bold" que importamos */
-    font-size: 1em; /* Ajustamos tamaño */
-    transition: color 0.3s ease; 
+    font-weight: 700;
+    transition: color 0.3s;
 }
 
-/* Efecto hover para los enlaces del menú */
 nav a:hover {
-    color: #d13885; /* Se pone rosa al pasar el mouse */
+    color: #d13885;
 }
-
-
-/* --- Estilos del Menú Hamburguesa --- */
 
 .menu-hamburguesa {
-    display: none; /* Oculto por defecto (en PC) */
-    font-size: 2em;
+    display: none;
+    font-size: 2rem;
     background: none;
     border: none;
     color: #d13885;
     cursor: pointer;
 }
 
-
-/* --- 8. Estilos de la Sección "Hero" (Inicio) --- */
-#inicio {
-    /* Un degradado suave que combine con tu marca */
-    background: linear-gradient(135deg, #fce3f4 0%, #e8e6f8 100%);
-    
-    /* Démosle altura y centrado */
-    min-height: 400px; /* Altura mínima de 400px */
-    padding: 40px;
-    
-    /* Centrado con Flexbox */
-    display: flex;
-    flex-direction: column; /* Apila los elementos (h2, p, a) verticalmente */
-    justify-content: center; /* Centra verticalmente */
-    align-items: center;     /* Centra horizontalmente */
-    text-align: center;
-}
-
-#inicio h2 {
-    font-size: 3em; /* 3 veces el tamaño de fuente normal. ¡Grande! */
-    color: #333; /* Texto oscuro sobre fondo claro */
-    margin: 0;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.1); /* Sombra de texto sutil */
-}
-
-#inicio p {
-    font-size: 1.4em; /* Un subtítulo claro y legible */
-    color: #555;
-    margin-top: 10px;
-    margin-bottom: 25px; /* Más espacio antes del botón */
-}
-
-/* --- 9. Estilos del Pie de Página (Footer) --- */
-footer {
-    background-color: #333; /* Un fondo gris oscuro, muy profesional */
-    color: #ffffff; /* Texto blanco para que contraste */
-    text-align: center; /* Centramos todo el texto */
-    padding: 30px 20px; /* 30px de espacio arriba/abajo */
-    
-    /* Un espacio para separarlo de la galería de productos */
-    margin-top: 40px; 
-}
-
-footer p {
-    margin: 5px 0; /* Pequeño espacio entre las dos líneas de texto */
-    font-size: 0.9em;
-}
-
-/* --- 10. Diseño Adaptable (Responsive) --- */
-@media (max-width: 768px) {
-
-    /* --- Arreglamos el Header --- */
-    header {
-        /* Esto ya lo tenías, asegúrate que 'flex-direction' sea 'row' de nuevo */
-        flex-direction: row; 
-        justify-content: space-between; /* Logo a la izq, hamburguesa a la der. */
-        padding: 20px;
-    }
-
-    /* --- 1. MOSTRAMOS el botón hamburguesa --- */
-    .menu-hamburguesa {
-        display: block; /* Lo mostramos en móvil */
-    }
-
-    /* --- 2. OCULTAMOS el menú de navegación normal --- */
-    #menu-principal {
-        display: none; /* Oculto por defecto en móvil */
-        
-        /* Estilos de cómo se verá cuando se abra */
-        position: absolute;
-        top: 80px; /* Debajo del header (depende de la altura de tu header) */
-        left: 0;
-        width: 100%;
-        background-color: white;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
-    
-    /* --- 3. ESTA ES LA CLASE QUE AÑADIRÁ JS --- */
-    #menu-principal.menu-abierto {
-        display: block; /* Cuando tenga esta clase, ¡se mostrará! */
-    }
-
-    /* --- 4. Arreglamos el 'nav ul' (el que ya tenías) --- */
-    nav ul {
-        flex-direction: column;
-        width: 100%;
-        text-align: center;
-    }
-
-    /* --- 5. Arreglamos el 'nav li' (el que ya tenías) --- */
-    nav li {
-        margin-left: 0;
-        /* margin-top: 15px; */ /* Lo cambiamos por padding */
-        padding: 20px 0;
-        border-bottom: 1px solid #f0f0f0; /* Línea separadora */
-    }
-    
-    /* ... (tus otros estilos de .hero, .tarjeta, etc. siguen aquí abajo) ... */
-    
-}
-/* --- 11. Estilo del Header al hacer Scroll --- */
-header.header-scrolled {
-    background-color: #ffffff; /* Se vuelve blanco */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Le aparece la sombra */
-}
-
-
-/* --- 12. ESTILOS DE LA PÁGINA DE LOGIN --- */
-
-.login-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    min-height: 100vh; /* Ocupa toda la altura de la pantalla */
-    background: linear-gradient(135deg, #fce3f4 0%, #e8e6f8 100%);
-}
-
-.login-form {
-    /* Reutilizamos el estilo de "tarjeta" */
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 30px 40px;
-    width: 100%;
-    max-width: 400px; /* Ancho máximo del formulario */
-    text-align: center;
-}
-
-.login-form h1 {
-    font-size: 4em; /* Hacemos el logo grande */
-    margin-bottom: 10px;
-}
-
-.login-form h2 {
-    font-family: 'Montserrat', sans-serif;
-    color: #555;
-    margin-bottom: 30px;
-}
-
-.form-group {
-    text-align: left;
-    margin-bottom: 20px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: 700;
-}
-
-.form-group input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box; /* Importante para que el padding no rompa el ancho */
-}
-
-/* Reutilizamos el botón, pero hacemos que ocupe todo el ancho */
-.login-form .boton-comprar {
-    width: 100%;
-    margin-top: 10px;
-}
-
-.error-texto {
-    color: #d9534f; /* Un color rojo para errores */
-    margin-top: 15px;
-    font-weight: bold;
-}
-
-.exito-texto {
-    color: #5cb85c; /* Un color verde para éxito */
-    margin-top: 15px;
-    font-weight: bold;
-}
-
-/* --- 13. ESTILOS DE LA PÁGINA DE ADMIN --- */
-
-.admin-container {
-    width: 90%;
-    max-width: 800px; /* Un poco más ancho que el login */
-    margin: 40px auto; /* Centrado, con margen superior/inferior */
-    padding: 20px;
-}
-
-.admin-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 30px;
-    padding-bottom: 20px;
-    border-bottom: 2px solid #eeeeee;
-}
-
-.admin-header h1 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 2em;
-    color: #333;
-    margin: 0;
-}
-
-/* El formulario de admin */
-.admin-form {
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-    padding: 30px;
-}
-
-.admin-form h2 {
-    font-family: 'Montserrat', sans-serif;
-    color: #333;
-    margin-top: 0;
-}
-
----
-
-
-/* --- 14. ESTILOS DE LA LISTA DE ADMIN --- */
-
-.lista-productos-admin {
-    margin-top: 40px;
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-    padding: 30px;
-}
-
-.lista-productos-admin h2 {
-    font-family: 'Montserrat', sans-serif;
-    color: #333;
-    margin-top: 0;
-    border-bottom: 2px solid #f0f0f0;
-    padding-bottom: 15px;
-}
-
-.producto-item-admin {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 0;
-    border-bottom: 1px solid #f5f5f5;
-}
-
-.producto-item-admin:last-child {
-    border-bottom: none;
-}
-
-.producto-item-admin span {
-    font-weight: 700;
-}
-
-.producto-item-admin .botones-admin button {
-    margin-left: 10px;
-    padding: 8px 12px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    color: white;
-    transition: transform 0.2s ease;
-}
-
-.boton-admin-editar {
-    background-color: #5bc0de; /* Un color azul */
-}
-.boton-admin-eliminar {
-    background-color: #d9534f; /* Un color rojo */
-}
-
-.producto-item-admin .botones-admin button:hover {
-    transform: scale(1.05);
-}
-
-.footer-contenido {
-    display: flex; /* Usar Flexbox para alineación */
-    justify-content: center; /* Centrar los ítems horizontalmente */
-    align-items: center; /* Centrar los ítems verticalmente */
-    gap: 10px; /* Espacio entre el icono y el nombre */
-}
-
-/* Estilos del enlace del icono */
-.footer-contenido a {
-    text-decoration: none; /* Quitar el subrayado del enlace */
-    color: inherit; /* Heredar el color del footer (blanco) */
-}
-
-.instagram-icon:hover {
-    color: #C13584; /* Cambiar a un color un poco más oscuro al pasar el ratón */
-}
-
-.nombre-footer {
-    font-size: 14px;
-    font-family: Arial, sans-serif;
-    opacity: 0.8; /* Ligeramente transparente */
-}
-
-
-/* Estilo específico para el icono de Facebook */
-.facebook-icon {
-    font-size: px;
-    color: #1877F2; /* Azul oficial de Facebook */
-    transition: color 0.3s;
-}
-
-/* Efecto Hover para Facebook */
-.facebook-icon:hover {
-    color: #0d65d9; /* Un azul un poco más oscuro al pasar el ratón */
-}
-
-
-/* Estilo específico para el icono de TikTok */
-.tiktok-icon {
-    font-size: 17px;
-    color: #000000; /* Color negro base de TikTok */
-    transition: transform 0.3s, color 0.3s;
-}
-
-/* Efecto al pasar el mouse */
-.tiktok-icon:hover {
-    color: #ff0050; /* El color rosado/rojo de TikTok */
-    transform: scale(1.1); /* Un ligero aumento para que resalte */
-}
-
-
+/* --- 3. Sección Hero (Carrusel y Texto) --- */
 .hero-container {
     position: relative;
     width: 100%;
-    height: 70vh; /* Ajusta la altura a tu gusto */
+    height: 75vh;
     overflow: hidden;
 }
 
-/* El carrusel ocupa todo el fondo */
 .mySwiper {
     width: 100%;
     height: 100%;
@@ -508,75 +93,180 @@ header.header-scrolled {
 .swiper-slide img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Esto evita que las imágenes se deformen */
+    object-fit: cover;
 }
 
-/* El texto encima de todo */
 .hero-overlay {
-    position: relative;
-    z-index: 2; /* Mayor que el del swiper para estar arriba */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.2); /* Oscurece un poquito el fondo para que el texto se lea mejor */
-    text-align: center;
-    color: white;
-    padding: 20px; /* Esto evita que el texto toque los bordes del cel */
-    box-sizing: border-box; /* Esto hace que el padding no estire el contenedor */
-}
-
-
-/* Estilo del botón de WhatsApp */
-.btn-whatsapp {
-    display: inline-block;
-    padding: 12px 25px;
-    background-color: #e1306c; /* El rosa de Ángeles Beauty */
-    color: #ffffff !important; /* Forzamos el texto blanco para que no salga azul */
-    text-decoration: none; /* Quitamos la línea de link azul */
-    border-radius: 8px; /* Bordes redondeados */
-    font-weight: bold;
-    font-size: 16px;
-    transition: background-color 0.3s ease, transform 0.2s;
-    margin-top: 15px;
-    z-index: 10; /* Nos aseguramos que esté por encima de todo */
-}
-
-/* Efecto al pasar el mouse o tocarlo */
-.btn-whatsapp:hover {
-    background-color: #c6265d; /* Un rosa un poco más oscuro */
-    transform: scale(1.05); /* Efecto de crecimiento leve */
-    color: #ffffff !important;
-}
-
-
-/* --- SECCIÓN HERO RESPONSIVA --- */
-
-/* 1. El contenedor que evita el desorden en 320dp */
-.hero-overlay {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.35); /* Capa oscura para legibilidad */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     padding: 20px;
-    box-sizing: border-box; /* Evita que el padding estire la pantalla */
-    background: rgba(0, 0, 0, 0.3); /* Oscurece un poco para resaltar el rosa */
 }
 
+.hero-overlay h1 {
+    color: #e1306c;
+    font-family: 'Great Vibes', cursive;
+    margin-bottom: 15px;
+    line-height: 1.1;
+    /* La magia para 320dp: nunca menor a 1.8rem */
+    font-size: clamp(1.8rem, 8vw, 4.5rem); 
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
 
-/* 3. Saltos de tamaño automáticos */
-@media (min-width: 768px) {
-    .hero-overlay h1 {
-        font-size: 3rem; /* Tamaño para Tablets */
+.hero-overlay p {
+    color: white;
+    font-size: clamp(1rem, 3vw, 1.4rem);
+    max-width: 600px;
+    margin-bottom: 25px;
+}
+
+/* Botón de WhatsApp Principal */
+.btn-whatsapp {
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: #e1306c;
+    color: #ffffff !important;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: bold;
+    transition: transform 0.3s, background-color 0.3s;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.btn-whatsapp:hover {
+    transform: scale(1.05);
+    background-color: #c6265d;
+}
+
+/* --- 4. Galería de Productos --- */
+.galeria-productos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+    padding: 40px 20px;
+}
+
+.tarjeta-producto {
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    width: 100%;
+    max-width: 300px; /* Evita que se vea gigante en PC */
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.tarjeta-producto:hover {
+    transform: translateY(-5px);
+}
+
+.tarjeta-producto img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.tarjeta-producto .precio {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #d13885;
+    margin: 15px 0;
+}
+
+/* --- 5. Footer y Redes Sociales --- */
+footer {
+    background-color: #222;
+    color: #ffffff;
+    text-align: center;
+    padding: 40px 20px;
+    margin-top: 50px;
+}
+
+.footer-contenido {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.social-icon {
+    font-size: 22px;
+    transition: color 0.3s, transform 0.3s;
+    color: white;
+    text-decoration: none;
+}
+
+.facebook-icon:hover { color: #1877F2; transform: scale(1.2); }
+.instagram-icon:hover { color: #C13584; transform: scale(1.2); }
+.tiktok-icon:hover { color: #ff0050; transform: scale(1.2); }
+
+/* --- 6. Admin y Login --- */
+.admin-container, .login-form {
+    width: 95%;
+    max-width: 500px;
+    margin: 40px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+.producto-item-admin {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+    gap: 10px;
+}
+
+/* --- 7. MEDIA QUERIES (RESPONSIVE FINAL) --- */
+
+@media (max-width: 768px) {
+    body { padding-top: 70px; }
+    
+    .menu-hamburguesa { display: block; }
+    
+    #menu-principal {
+        display: none;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background-color: white;
+        flex-direction: column;
+        padding: 20px 0;
+        box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+    }
+
+    #menu-principal.menu-abierto { display: flex; }
+    
+    nav li { margin: 10px 0; }
+
+    .hero-container { height: 60vh; }
+    
+    .producto-item-admin {
+        flex-direction: column;
+        text-align: center;
     }
 }
 
-@media (min-width: 1200px) {
-    .hero-overlay h1 {
-        font-size: 4.5rem; /* Tamaño para Computadoras */
-    }
+/* Ajuste extremo para pantallas de 320dp */
+@media (max-width: 320px) {
+    .hero-overlay h1 { font-size: 1.6rem; }
+    .hero-overlay p { font-size: 0.85rem; }
+    .btn-whatsapp { padding: 10px 20px; font-size: 14px; }
 }
