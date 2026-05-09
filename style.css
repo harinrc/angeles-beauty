@@ -538,3 +538,62 @@ footer {
 #contacto .footer-content i:hover {
     color: #e1306c !important;
 }
+
+
+/* Contenedor principal del footer */
+.footer-container {
+    display: flex;
+    justify-content: space-around; /* Esto separa las dos columnas */
+    align-items: flex-start;
+    flex-wrap: wrap; /* Para que en celular se pongan uno abajo del otro */
+    max-width: 1000px;
+    margin: 0 auto;
+    gap: 20px;
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 250px;
+    text-align: center;
+}
+
+/* Títulos de las columnas */
+.footer-section h4 {
+    color: #e1306c;
+    margin-bottom: 15px;
+}
+
+/* Estilo de los ICONOS (Aquí está la clave para que no desaparezcan) */
+.footer-social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+}
+
+.footer-social-icons a {
+    color: var(--text-color) !important; /* Usa el color del modo (claro/oscuro) */
+    font-size: 1.8rem;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.footer-social-icons a:hover {
+    color: #e1306c !important;
+    transform: translateY(-5px);
+}
+
+/* Estilo de la LISTA de navegación */
+.footer-section ul {
+    list-style: none !important;
+    padding: 0;
+}
+
+.footer-section ul li a {
+    color: var(--text-color) !important;
+    text-decoration: none;
+    line-height: 2; /* Les da espacio para que no se vean amontonados */
+}
+
+.footer-section ul li a:hover {
+    color: #e1306c !important;
+}
