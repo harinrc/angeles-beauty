@@ -7,7 +7,29 @@
     <link rel="stylesheet" href="style.css"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <nav class="navbar">
+    <div class="logo">
+        <h1 class="logo-texto">Ángeles Beauty</h1>
+    </div>
+
+    <div class="menu-toggle" id="mobile-menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </div>
+
+    <ul class="nav-links">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="nosotros.html" class="active">Quiénes Somos</a></li>
+        <li><a href="index.html#productos">Productos</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+        <li><button id="btn-dark-mode"><i class="fas fa-moon"></i></button></li>
+    </ul>
+</nav>
 </head>
+
+
 <body>
     
 
@@ -67,6 +89,53 @@
 </main>
 </main>
 
+<footer id="contacto" class="footer">
+    <div class="footer-container">
+        
+        <div class="footer-section">
+            <h4>Síguenos</h4>
+            <div class="footer-social-icons">
+                <a href="https://www.instagram.com/ange.les_beauty3667" target="_blank">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.tiktok.com/@angelesnava48" target="_blank">
+                    <i class="fab fa-tiktok"></i>
+                </a>
+                <a href="https://www.facebook.com/profile.php?id=61585547381372" target="_blank">
+                    <i class="fab fa-facebook"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="footer-section">
+            <h4>Navegación</h4>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="nosotros.html">Quiénes Somos</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; 2026 Ángeles Beauty - Managua, Nicaragua.
+            Creado con amor y dedicación❤️
+        </p>
+    </div>
+</footer>
 
 </body>
 </html>
+
+
+
+<script>
+const menu = document.querySelector('#mobile-menu');
+const menuLinks = document.querySelector('.nav-links');
+
+menu.addEventListener('click', function() {
+    menu.classList.toggle('is-active');
+    menuLinks.classList.toggle('active');
+});</script>
+
