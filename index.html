@@ -179,8 +179,22 @@
                         slidesHTML += `<div class="swiper-slide"><img src="${url}" alt="${producto.nombre}"></div>`;
                     });
 
+                    // 1. Extraemos la primera imagen para el enlace de WhatsApp
+                    const fotoPrincipal = imagenes[0]; 
+
+                    // 2. Construir el mensaje con Nombre, Precio y el enlace de la foto principal
                     let mensaje = `Hola... Vengo de Ángeles Beauty y me interesa este producto: \n\n`;
-                    mensaje += `Producto: ${producto.nombre}\n Precio: ${producto.precio}\n\n ¿Podrías darme más detalles?`;
+                    mensaje += `Producto: ${producto.nombre}\n`;
+                    mensaje += `Precio: ${producto.precio}\n\n`;
+
+                    // Agregamos el enlace de la imagen principal para que puedas verla en el chat
+                    if (fotoPrincipal) {
+                    mensaje += `Presiona el enlace para ver imagen: ${fotoPrincipal}\n\n`;
+                    }
+
+                    mensaje += `¿Podrías darme más detalles? Gracias.`;
+
+                    // 3. Codificar y crear el enlace
                     const enlaceWhatsApp = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(mensaje)}`;
 
                     tarjeta.innerHTML = `
