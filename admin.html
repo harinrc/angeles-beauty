@@ -5,22 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel de Admin - Ángeles Beauty</title>
     <link rel="icon" href="favicon.png" type="image/png">
-    
     <link rel="stylesheet" href="style.css"> 
 </head>
 <body>
 
     <main class="admin-container">
-
         <div class="admin-header">
             <h1 class="logo-texto">Panel de Administración</h1>
             <button id="logout-button" class="btn-whatsapp" style="background-color: #d9534f; border:none;">Cerrar Sesión</button>
         </div>
 
         <form id="add-product-form" class="admin-form">
-
             <h2 id="form-titulo">Añadir Nuevo Producto</h2>
-
             <input type="hidden" id="prod-id">
 
             <div class="form-group">
@@ -34,30 +30,26 @@
             </div>
 
             <div class="form-group">
-                <label for="prod-imagen">Imagen del Producto:</label>
-                <input type="file" id="prod-imagen" accept="image/png, image/jpeg" style="padding: 10px 0;">
-
-                <div id="preview-container" style="display: none; margin-top: 15px;">
-                    <p style="font-weight: 700; margin-bottom: 5px;">Imagen actual:</p>
-                    <img id="current-image-preview" src="" alt="Imagen actual" style="width: 100px; height: 100px; object-fit: cover; border-radius: 10px; border: 2px solid #e1306c;">
-                    <input type="hidden" id="prod-imagen-actual">
-                </div>
+                <label for="prod-categoria">Categoría:</label>
+                <select id="prod-categoria" style="width: 100%; padding: 10px; border-radius: 5px;">
+                    <option value="Maquillaje">Maquillaje</option>
+                    <option value="Joyería">Joyería</option>
+                    <option value="Skin Care">Skin Care</option>
+                    <option value="Otros">Otros</option>
+                </select>
             </div>
 
             <div class="form-group">
-    <label for="prod-categoria">Categoría:</label>
-    <select id="prod-categoria" style="width: 100%; padding: 10px; border-radius: 5px;">
-        <option value="Maquillaje">Maquillaje</option>
-        <option value="Joyería">Joyería</option>
-        <option value="Skin Care">Skin Care</option>
-        <option value="Otros">Otros</option>
-    </select>
-</div>
+                <label for="prod-imagen">Imágenes del Producto (Puedes seleccionar varias):</label>
+                <input type="file" id="prod-imagen" accept="image/png, image/jpeg" style="padding: 10px 0;" multiple>
+                <div id="preview-container" style="display: none; margin-top: 15px;">
+                    <p style="font-weight: 700; margin-bottom: 5px;">Estado:</p>
+                    <p id="info-edicion" style="color: #e1306c;">Editando producto existente...</p>
+                </div>
+            </div>
 
             <button type="submit" class="btn-whatsapp" style="width: 100%; border:none; cursor:pointer;">Guardar Producto</button>
-
-            <button type="button" id="boton-cancelar" class="boton-admin-editar" style="background-color: #777; display: none; margin-top: 10px; width: 100%; border:none; padding:10px; border-radius:5px; color:white; font-weight:bold;">Cancelar Edición</button>
-
+            <button type="button" id="boton-cancelar" style="background-color: #777; display: none; margin-top: 10px; width: 100%; border:none; padding:10px; border-radius:5px; color:white; font-weight:bold; cursor:pointer;">Cancelar Edición</button>
             <p id="add-message" style="margin-top: 15px;"></p>
         </form>
 
@@ -67,207 +59,165 @@
                 <p>Cargando lista de productos...</p>
             </div>
         </div>
-
     </main>
 
-    <footer id="contacto" class="footer">
-    <div class="footer-container">
-        
-        <div class="footer-section">
-            <h4>Síguenos</h4>
-            <div class="footer-social-icons">
-                <a href="https://www.instagram.com/ange.les_beauty3667" target="_blank">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a href="https://www.tiktok.com/@angelesnava48" target="_blank">
-                    <i class="fab fa-tiktok"></i>
-                </a>
-                <a href="https://www.facebook.com/profile.php?id=61585547381372" target="_blank">
-                    <i class="fab fa-facebook"></i>
-                </a>
-            </div>
-        </div>
-
-        <div class="footer-section">
-            <h4>Navegación</h4>
-            <ul>
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="nosotros.html">Quiénes Somos?</a></li>
-                <li><a href="#contacto">Contacto</a></li>
-            </ul>
-        </div>
-
-    </div>
-
-    <div class="footer-bottom">
-        <p>&copy; 2026 Ángeles Beauty - Managua, Nicaragua.
-            Creado con amor y dedicación❤️
-        </p>
-    </div>
-</footer>
-
-
     <script type="module">
-    // --- 1. INICIALIZACIÓN DE FIREBASE ---
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
-    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
-    import { getFirestore, collection, addDoc, getDocs, getDoc, doc, deleteDoc, updateDoc } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js";
-    import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-storage.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
+        import { getFirestore, collection, addDoc, getDocs, getDoc, doc, deleteDoc, updateDoc } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js";
+        import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-storage.js";
 
-    const firebaseConfig = {
-        apiKey: "AIzaSyAPUPxZNuJfX3KtiI1p73AAfDgNqVo8a-g",
-        authDomain: "tienda-angeles-beauty.firebaseapp.com",
-        projectId: "tienda-angeles-beauty",
-        storageBucket: "tienda-angeles-beauty.firebasestorage.app",
-        messagingSenderId: "913588395045",
-        appId: "1:913588395045:web:ce50c2f7a296c85ecff3cc"
-    };
+        const firebaseConfig = {
+            apiKey: "AIzaSyAPUPxZNuJfX3KtiI1p73AAfDgNqVo8a-g",
+            authDomain: "tienda-angeles-beauty.firebaseapp.com",
+            projectId: "tienda-angeles-beauty",
+            storageBucket: "tienda-angeles-beauty.firebasestorage.app",
+            messagingSenderId: "913588395045",
+            appId: "1:913588395045:web:ce50c2f7a296c85ecff3cc"
+        };
 
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db = getFirestore(app);
-    const storage = getStorage(app); 
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const storage = getStorage(app);
 
-    onAuthStateChanged(auth, (user) => {
-        if (user) { cargarProductosAdmin(); } 
-        else { window.location.href = 'login.html'; }
-    });
+        onAuthStateChanged(auth, (user) => {
+            if (user) { cargarProductosAdmin(); } 
+            else { window.location.href = 'login.html'; }
+        });
 
-    const logoutButton = document.querySelector('#logout-button');
-    logoutButton.addEventListener('click', async () => {
-        await signOut(auth); 
-        window.location.href = 'login.html';
-    });
+        const logoutButton = document.querySelector('#logout-button');
+        logoutButton.addEventListener('click', async () => {
+            await signOut(auth); 
+            window.location.href = 'login.html';
+        });
 
-    // --- 4. LÓGICA DEL FORMULARIO MULTI-IMAGEN ---
-    const addForm = document.querySelector('#add-product-form');
-    const addMsg = document.querySelector('#add-message');
-    const formTitulo = document.querySelector('#form-titulo');
-    const formBotonGuardar = addForm.querySelector('button[type="submit"]');
-    const botonCancelar = document.querySelector('#boton-cancelar');
-    const campoIdOculto = document.querySelector('#prod-id');
-    const inputArchivo = document.querySelector('#prod-imagen');
-    // Habilitamos selección múltiple
-    inputArchivo.setAttribute('multiple', '');
+        const addForm = document.querySelector('#add-product-form');
+        const addMsg = document.querySelector('#add-message');
+        const formTitulo = document.querySelector('#form-titulo');
+        const formBotonGuardar = addForm.querySelector('button[type="submit"]');
+        const botonCancelar = document.querySelector('#boton-cancelar');
+        const campoIdOculto = document.querySelector('#prod-id');
+        const inputArchivo = document.querySelector('#prod-imagen');
 
-    addForm.addEventListener('submit', async (e) => {
-        e.preventDefault(); 
-        const nombre = addForm['prod-nombre'].value;
-        const precio = addForm['prod-precio'].value;
-        const id = campoIdOculto.value;
-        const archivos = inputArchivo.files; 
+        addForm.addEventListener('submit', async (e) => {
+            e.preventDefault(); 
+            const nombre = addForm['prod-nombre'].value;
+            const precio = addForm['prod-precio'].value;
+            const categoria = document.querySelector('#prod-categoria').value;
+            const id = campoIdOculto.value;
+            const archivos = inputArchivo.files; 
 
-        formBotonGuardar.disabled = true;
-        formBotonGuardar.textContent = "Procesando...";
+            formBotonGuardar.disabled = true;
+            formBotonGuardar.textContent = "Procesando...";
 
-        try {
-            let listaUrlsFinal = []; 
+            try {
+                let listaUrlsFinal = [];
 
-            // Si hay archivos nuevos, los subimos todos
-            if (archivos.length > 0) {
-                mostrarMensaje(`Subiendo ${archivos.length} imágenes...`, "exito-texto");
-                
-                for (let i = 0; i < archivos.length; i++) {
-                    const archivo = archivos[i];
-                    const storageRef = ref(storage, `productos/${Date.now()}-${archivo.name}`);
-                    const uploadTask = await uploadBytesResumable(storageRef, archivo);
-                    const url = await getDownloadURL(uploadTask.ref);
-                    listaUrlsFinal.push(url);
+                if (archivos.length > 0) {
+                    mostrarMensaje(`Subiendo ${archivos.length} imágenes...`, "exito-texto");
+                    for (let i = 0; i < archivos.length; i++) {
+                        const archivo = archivos[i];
+                        const storageRef = ref(storage, `productos/${Date.now()}-${archivo.name}`);
+                        const uploadTask = await uploadBytesResumable(storageRef, archivo);
+                        const url = await getDownloadURL(uploadTask.ref);
+                        listaUrlsFinal.push(url);
+                    }
+                } else if (id) {
+                    const docSnap = await getDoc(doc(db, 'productos', id));
+                    listaUrlsFinal = docSnap.data().imagenUrl;
                 }
-            } else if (id) {
-                // Si estamos editando y no subimos fotos nuevas, mantenemos las que ya estaban
-                const docRef = doc(db, 'productos', id);
-                const docSnap = await getDoc(docRef);
-                listaUrlsFinal = docSnap.data().imagenUrl;
+
+                const datosProducto = {
+                    nombre: nombre,
+                    precio: precio,
+                    categoria: categoria,
+                    imagenUrl: listaUrlsFinal
+                };
+
+                if (id) {
+                    await updateDoc(doc(db, 'productos', id), datosProducto);
+                    mostrarMensaje("¡Producto actualizado!", "exito-texto");
+                } else {
+                    await addDoc(collection(db, 'productos'), datosProducto);
+                    mostrarMensaje("¡Producto guardado!", "exito-texto");
+                }
+
+                resetearFormulario(); 
+                cargarProductosAdmin(); 
+            } catch (error) {
+                console.error(error);
+                mostrarMensaje(`Error: ${error.message}`, "error-texto");
+            } finally {
+                formBotonGuardar.disabled = false;
+                formBotonGuardar.textContent = "Guardar Producto";
             }
+        });
 
-            // 1. Obtener el elemento del DOM
-            const selectCategoria = document.querySelector('#prod-categoria');
+        async function cargarProductosAdmin() {
+            const listaContainer = document.querySelector('#lista-productos-container');
+            if (!listaContainer) return;
+            listaContainer.innerHTML = "<p>Cargando lista...</p>";
+            try {
+                const productosSnapshot = await getDocs(collection(db, 'productos'));
+                let html = "";
+                productosSnapshot.forEach(doc => {
+                    const p = doc.data();
+                    html += `
+                        <div class="producto-item-admin">
+                            <span>${p.nombre} (${p.categoria || 'Sin cat.'})</span>
+                            <div class="botones-admin">
+                                <button class="boton-admin-editar" data-id="${doc.id}">Editar</button>
+                                <button class="boton-admin-eliminar" data-id="${doc.id}">Eliminar</button>
+                            </div>
+                        </div>`;
+                });
+                listaContainer.innerHTML = html;
 
+                // Delegación de eventos para botones
+                listaContainer.querySelectorAll('.boton-admin-eliminar').forEach(btn => {
+                    btn.addEventListener('click', () => eliminarProducto(btn.dataset.id));
+                });
+                listaContainer.querySelectorAll('.boton-admin-editar').forEach(btn => {
+                    btn.addEventListener('click', () => prepararEdicion(btn.dataset.id));
+                });
 
-            const categoria = selectCategoria ? selectCategoria.value : "Sin categoría";
+            } catch (e) { console.error(e); }
+        }
 
-
-            const datosProducto = {
-            nombre: nombre,
-            precio: precio,
-            categoria: categoria, 
-            imagenUrl: listaUrlsFinal
-            };
-
-            if (id) {
-                await updateDoc(doc(db, 'productos', id), datosProducto);
-                mostrarMensaje("¡Producto actualizado!", "exito-texto");
-            } else {
-                await addDoc(collection(db, 'productos'), datosProducto);
-                mostrarMensaje("¡Producto guardado con éxito!", "exito-texto");
+        async function eliminarProducto(id) {
+            if (confirm("¿Eliminar producto?")) {
+                await deleteDoc(doc(db, 'productos', id));
+                cargarProductosAdmin();
             }
-
-            resetearFormulario(); 
-            cargarProductosAdmin(); 
-
-        } catch (error) {
-            console.error(error);
-            mostrarMensaje(`Error: ${error.message}`, "error-texto");
-        } finally {
-            formBotonGuardar.disabled = false;
-            formBotonGuardar.textContent = "Guardar Producto";
         }
-    });
 
-    // --- RESTO DE FUNCIONES (Cargar, Editar, Eliminar) ---
-    async function cargarProductosAdmin() {
-        const listaContainer = document.querySelector('#lista-productos-container');
-        if (!listaContainer) return;
-        listaContainer.innerHTML = "<p>Cargando lista...</p>";
-        try {
-            const productosSnapshot = await getDocs(collection(db, 'productos'));
-            let html = "";
-            productosSnapshot.forEach(doc => {
-                const p = doc.data();
-                html += `
-                    <div class="producto-item-admin">
-                        <span>${p.nombre} (${Array.isArray(p.imagenUrl) ? p.imagenUrl.length : 1} fotos)</span>
-                        <div class="botones-admin">
-                            <button class="boton-admin-editar" onclick="prepararEdicion('${doc.id}')">Editar</button>
-                            <button class="boton-admin-eliminar" onclick="eliminarProducto('${doc.id}')">Eliminar</button>
-                        </div>
-                    </div>`;
-            });
-            listaContainer.innerHTML = html;
-        } catch (e) { console.error(e); }
-    }
-
-    window.eliminarProducto = async (id) => {
-        if (confirm("¿Eliminar producto?")) {
-            await deleteDoc(doc(db, 'productos', id));
-            cargarProductosAdmin();
+        async function prepararEdicion(id) {
+            const docSnap = await getDoc(doc(db, 'productos', id));
+            const p = docSnap.data();
+            addForm['prod-nombre'].value = p.nombre;
+            addForm['prod-precio'].value = p.precio;
+            document.querySelector('#prod-categoria').value = p.categoria || "Otros";
+            campoIdOculto.value = id;
+            formTitulo.textContent = "Editando Producto";
+            botonCancelar.style.display = "block";
+            window.scrollTo(0,0);
         }
-    }
 
-    window.prepararEdicion = async (id) => {
-        const docSnap = await getDoc(doc(db, 'productos', id));
-        const p = docSnap.data();
-        addForm['prod-nombre'].value = p.nombre;
-        addForm['prod-precio'].value = p.precio;
-        campoIdOculto.value = id;
-        formTitulo.textContent = "Editando Producto";
-        botonCancelar.style.display = "block";
-        window.scrollTo(0,0);
-    }
+        function resetearFormulario() {
+            addForm.reset();
+            campoIdOculto.value = "";
+            formTitulo.textContent = "Añadir Nuevo Producto";
+            botonCancelar.style.display = "none";
+        }
 
-    function resetearFormulario() {
-        addForm.reset();
-        campoIdOculto.value = "";
-        formTitulo.textContent = "Añadir Nuevo Producto";
-        botonCancelar.style.display = "none";
-    }
+        function mostrarMensaje(texto, clase) {
+            addMsg.textContent = texto;
+            addMsg.className = clase;
+            setTimeout(() => { addMsg.textContent = ""; }, 3000);
+        }
 
-    function mostrarMensaje(texto, clase) {
-        addMsg.textContent = texto;
-        addMsg.className = clase;
-        setTimeout(() => { addMsg.textContent = ""; }, 3000);
-    }
-
-    botonCancelar.addEventListener('click', resetearFormulario);
-</script>
+        botonCancelar.addEventListener('click', resetearFormulario);
+    </script>
+</body>
+</html>

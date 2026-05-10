@@ -22,12 +22,8 @@
 
 <header>
     <h1 class="logo-texto">Ángeles Beauty</h1> 
-    <button id="menu-hamburguesa" class="menu-hamburguesa" aria-label="Abrir menú">
-        &#9776;
-    </button>
-    <button id="dark-mode-toggle" style="background:none; border:none; cursor:pointer; font-size:1.5rem;">
-        🌙
-    </button>
+    <button id="menu-hamburguesa" class="menu-hamburguesa" aria-label="Abrir menú">&#9776;</button>
+    <button id="dark-mode-toggle" style="background:none; border:none; cursor:pointer; font-size:1.5rem;">🌙</button>
     <nav id="menu-principal">
         <ul>
             <li><a href="#">Inicio</a></li>
@@ -57,7 +53,7 @@
         <div class="hero-overlay">
             <h1>Productos de Belleza Exclusivos, Moda, Estética y mucho más...</h1>
             <p>Descubre nuestra selección única para realzar tu Belleza, Moda, Estética y mucho más... somos una tienda en línea ubicada en Ciudad Sandino, Managua, Nicaragua, contamos con envíos a cualquier parte del país.</p>
-            <a href="https://wa.me/50558068013?text=Hola...%20Vengo%20de%20tu%20página%20web,%20quiero%20más%20información%20acerca%20de%20los%20productos%20de%20Ángeles%20Beauty!!!" class="btn-whatsapp">Contáctanos por WhatsApp</a>
+            <a href="https://wa.me/50558068013?text=Hola...%20Vengo%20de%20tu%20página%20web!!!" class="btn-whatsapp">Contáctanos por WhatsApp</a>
         </div>
     </section>
 
@@ -65,15 +61,16 @@
         <h2>Nuestros Productos</h2>
 
         <div class="buscador-container" style="text-align: center; margin-bottom: 20px; padding: 0 15px;">
-        <input type="text" id="input-buscador" placeholder="Buscar productos (ej. Labial, Anillo...)" 
-               style="width: 100%; max-width: 400px; padding: 12px; border-radius: 25px; border: 2px solid #e1306c; outline: none;">
-    </div>
+            <input type="text" id="input-buscador" placeholder="Buscar productos (ej. Labial, Anillo...)" 
+                   style="width: 100%; max-width: 400px; padding: 12px; border-radius: 25px; border: 2px solid #e1306c; outline: none;">
+        </div>
 
-    <div class="filtros-categorias" style="display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;">
-    <button class="btn-filtro" data-categoria="todos" style="background: #e1306c; color: white; border: none; padding: 8px 15px; border-radius: 20px; cursor: pointer;">Todos</button>
-    <button class="btn-filtro" data-categoria="Maquillaje" style="background: #eee; border: none; padding: 8px 15px; border-radius: 20px; cursor: pointer;">Maquillaje</button>
-    <button class="btn-filtro" data-categoria="Joyería" style="background: #eee; border: none; padding: 8px 15px; border-radius: 20px; cursor: pointer;">Joyería</button>
-</div>
+        <div class="filtros-categorias" style="display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;">
+            <button class="btn-filtro" data-categoria="todos" style="background: #e1306c; color: white; border: none; padding: 8px 15px; border-radius: 20px; cursor: pointer;">Todos</button>
+            <button class="btn-filtro" data-categoria="Maquillaje" style="background: #eee; color: black; border: none; padding: 8px 15px; border-radius: 20px; cursor: pointer;">Maquillaje</button>
+            <button class="btn-filtro" data-categoria="Joyería" style="background: #eee; color: black; border: none; padding: 8px 15px; border-radius: 20px; cursor: pointer;">Joyería</button>
+            <button class="btn-filtro" data-categoria="Skin Care" style="background: #eee; color: black; border: none; padding: 8px 15px; border-radius: 20px; cursor: pointer;">Skin Care</button>
+        </div>
 
         <div class="galeria-productos">
             <p>Cargando productos...</p>
@@ -86,18 +83,11 @@
         <div class="footer-section">
             <h4>Síguenos</h4>
             <div class="footer-social-icons">
-                <a href="https://www.instagram.com/ange.les_beauty3667" target="_blank">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a href="https://www.tiktok.com/@angelesnava48" target="_blank">
-                    <i class="fab fa-tiktok"></i>
-                </a>
-                <a href="https://www.facebook.com/profile.php?id=61585547381372" target="_blank">
-                    <i class="fab fa-facebook"></i>
-                </a>
+                <a href="https://www.instagram.com/ange.les_beauty3667" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.tiktok.com/@angelesnava48" target="_blank"><i class="fab fa-tiktok"></i></a>
+                <a href="https://www.facebook.com/profile.php?id=61585547381372" target="_blank"><i class="fab fa-facebook"></i></a>
             </div>
         </div>
-
         <div class="footer-section">
             <h4>Navegación</h4>
             <ul>
@@ -107,28 +97,12 @@
             </ul>
         </div>
     </div>
-
     <div class="footer-bottom">
         <p>&copy; 2026 Ángeles Beauty - Managua, Nicaragua. Creado con amor y dedicación❤️</p>
     </div>
 </footer>
 
-<button id="btnInstall" style="display:none;" class="btn-whatsapp">Instalar Aplicación</button>
-
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var swiper = new Swiper(".mySwiper", {
-            loop: true,
-            effect: "fade",
-            autoplay: {
-                delay: 4000,
-                disableOnInteraction: false,
-            },
-        });
-    });
-</script>
 
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
@@ -147,138 +121,117 @@
     const db = getFirestore(app);
     const WHATSAPP_NUMBER = "50558068013"; 
 
-    window.addEventListener('DOMContentLoaded', () => {
-        // --- 1. Efecto Scroll Header ---
-        const header = document.querySelector('header');
-        if (header) { 
-            window.addEventListener('scroll', () => {
-                window.scrollY > 50 ? header.classList.add('header-scrolled') : header.classList.remove('header-scrolled');
-            });
-        }
+    // --- FUNCION DE FILTRADO COMBINADO ---
+    function aplicarFiltros() {
+        const texto = document.querySelector('#input-buscador').value.toLowerCase();
+        // Buscamos el botón que tiene el fondo rosa (el activo)
+        const btnActivo = Array.from(document.querySelectorAll('.btn-filtro')).find(b => b.style.backgroundColor === 'rgb(225, 48, 108)' || b.style.background.includes('rgb(225, 48, 108)'));
+        const categoriaSeleccionada = btnActivo ? btnActivo.dataset.categoria : "todos";
 
-        // --- 2. Menú Hamburguesa ---
-        const botonMenu = document.querySelector('#menu-hamburguesa');
-        const menuPrincipal = document.querySelector('#menu-principal');
-        if (botonMenu && menuPrincipal) {
-            botonMenu.addEventListener('click', () => {
-                menuPrincipal.classList.toggle('menu-abierto');
-            });
-        }
+        const tarjetas = document.querySelectorAll('.tarjeta-producto');
 
-        // --- 3. Cargar Productos ---
-        async function cargarProductos() {
-            const galeria = document.querySelector('.galeria-productos');
-            try {
-                const productosCol = collection(db, 'productos');
-                const productosSnapshot = await getDocs(productosCol);
+        tarjetas.forEach(tarjeta => {
+            const nombre = tarjeta.querySelector('h3').textContent.toLowerCase();
+            const categoriaTarjeta = tarjeta.dataset.categoria;
 
-                if (productosSnapshot.empty) {
-                    galeria.innerHTML = "<p>No hay productos disponibles.</p>";
-                    return; 
-                }
+            const coincideNombre = nombre.includes(texto);
+            const coincideCategoria = (categoriaSeleccionada === "todos" || categoriaTarjeta === categoriaSeleccionada);
 
-                galeria.innerHTML = ""; 
+            tarjeta.style.display = (coincideNombre && coincideCategoria) ? "block" : "none";
+        });
+    }
 
-                productosSnapshot.forEach(doc => {
-                    const producto = doc.data();
-                    const tarjeta = document.createElement('article');
-                    tarjeta.className = 'tarjeta-producto'; 
-
-                    // Lógica para manejar una o varias imágenes
-                    const imagenes = Array.isArray(producto.imagenUrl) ? producto.imagenUrl : [producto.imagenUrl];
-                    let slidesHTML = "";
-                    imagenes.forEach(url => {
-                        slidesHTML += `<div class="swiper-slide"><img src="${url}" alt="${producto.nombre}"></div>`;
-                    });
-
-                    // 1. Extraemos la primera imagen para el enlace de WhatsApp
-                    const fotoPrincipal = imagenes[0]; 
-
-                    // 2. Construir el mensaje con Nombre, Precio y el enlace de la foto principal
-                    let mensaje = `Hola... Vengo de Ángeles Beauty y me interesa este producto: \n\n`;
-                    mensaje += `Producto: ${producto.nombre}\n`;
-                    mensaje += `Precio: ${producto.precio}\n\n`;
-
-                    // Agregamos el enlace de la imagen principal para que puedas verla en el chat
-                    if (fotoPrincipal) {
-                    mensaje += `Presiona el enlace para ver imagen: ${fotoPrincipal}\n\n`;
-                    }
-
-                    mensaje += `¿Podrías darme más detalles? Gracias.`;
-
-                    // 3. Codificar y crear el enlace
-                    const enlaceWhatsApp = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(mensaje)}`;
-
-                    tarjeta.innerHTML = `
-                        <div class="swiper swiper-tarjeta">
-                            <div class="swiper-wrapper">${slidesHTML}</div>
-                            <div class="swiper-button-next"></div>
-                            <div class="swiper-button-prev"></div>
-                            <div class="swiper-pagination"></div>
-                        </div>
-                        <h3>${producto.nombre}</h3>
-                        <p class="precio">${producto.precio}</p>
-                        <a href="${enlaceWhatsApp}" class="btn-whatsapp" target="_blank">Preguntar por WhatsApp</a>
-                    `;
-
-                    galeria.appendChild(tarjeta);
-
-                    // Inicializamos Swiper para esta tarjeta
-                    new Swiper(tarjeta.querySelector('.swiper-tarjeta'), {
-                        loop: imagenes.length > 1,
-                        autoplay: {
-                        delay: 3000, // Cambia cada 3 segundos
-                        disableOnInteraction: false, // Sigue rotando aunque el usuario lo toque
-                        },
-                        pagination: { el: ".swiper-pagination", clickable: true },
-                        navigation: {
-                            nextEl: tarjeta.querySelector('.swiper-button-next'),
-                            prevEl: tarjeta.querySelector('.swiper-button-prev'),
-                        },
-                    });
-                });
-            } catch (error) {
-                console.error(error);
-                galeria.innerHTML = "<p>Error al cargar productos.</p>";
+    async function cargarProductos() {
+        const galeria = document.querySelector('.galeria-productos');
+        try {
+            const productosSnapshot = await getDocs(collection(db, 'productos'));
+            if (productosSnapshot.empty) {
+                galeria.innerHTML = "<p>No hay productos disponibles.</p>";
+                return; 
             }
-        }
+            galeria.innerHTML = ""; 
+
+            productosSnapshot.forEach(doc => {
+                const producto = doc.data();
+                const tarjeta = document.createElement('article');
+                tarjeta.className = 'tarjeta-producto'; 
+                tarjeta.setAttribute('data-categoria', producto.categoria || "Otros");
+
+                const imagenes = Array.isArray(producto.imagenUrl) ? producto.imagenUrl : [producto.imagenUrl];
+                let slidesHTML = "";
+                imagenes.forEach(url => {
+                    slidesHTML += `<div class="swiper-slide"><img src="${url}" alt="${producto.nombre}"></div>`;
+                });
+
+                const mensaje = `Hola Ángeles Beauty, me interesa: ${producto.nombre} (${producto.precio}). Enlace: ${imagenes[0]}`;
+                const enlaceWhatsApp = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(mensaje)}`;
+
+                tarjeta.innerHTML = `
+                    <div class="swiper swiper-tarjeta">
+                        <div class="swiper-wrapper">${slidesHTML}</div>
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-pagination"></div>
+                    </div>
+                    <h3>${producto.nombre}</h3>
+                    <p class="precio">${producto.precio}</p>
+                    <a href="${enlaceWhatsApp}" class="btn-whatsapp" target="_blank">Preguntar por WhatsApp</a>
+                `;
+                galeria.appendChild(tarjeta);
+
+                new Swiper(tarjeta.querySelector('.swiper-tarjeta'), {
+                    loop: imagenes.length > 1,
+                    autoplay: { delay: 3000, disableOnInteraction: false },
+                    pagination: { el: ".swiper-pagination", clickable: true },
+                    navigation: {
+                        nextEl: tarjeta.querySelector('.swiper-button-next'),
+                        prevEl: tarjeta.querySelector('.swiper-button-prev'),
+                    },
+                });
+            });
+        } catch (error) { console.error(error); }
+    }
+
+    // Eventos de Inicialización
+    window.addEventListener('DOMContentLoaded', () => {
         cargarProductos();
 
-            const buscador = document.querySelector('#input-buscador');
-            buscador.addEventListener('input', (e) => {
-            const texto = e.target.value.toLowerCase();
-            const tarjetas = document.querySelectorAll('.tarjeta-producto');
+        // Buscador
+        document.querySelector('#input-buscador').addEventListener('input', aplicarFiltros);
 
-            tarjetas.forEach(tarjeta => {
-            const nombre = tarjeta.querySelector('h3').textContent.toLowerCase();
-            // Si el texto del buscador está en el nombre, se muestra, si no, se oculta
-            tarjeta.style.display = nombre.includes(texto) ? 'block' : 'none';
+        // Botones de Filtro
+        document.querySelectorAll('.btn-filtro').forEach(boton => {
+            boton.addEventListener('click', () => {
+                document.querySelectorAll('.btn-filtro').forEach(b => {
+                    b.style.background = "#eee";
+                    b.style.color = "black";
+                });
+                boton.style.background = "#e1306c";
+                boton.style.color = "white";
+                aplicarFiltros();
+            });
         });
+
+        // Header scroll
+        const header = document.querySelector('header');
+        window.addEventListener('scroll', () => {
+            window.scrollY > 50 ? header.classList.add('header-scrolled') : header.classList.remove('header-scrolled');
         });
 
-        const botonesFiltro = document.querySelectorAll('.btn-filtro');
-
-botonesFiltro.forEach(boton => {
-    boton.addEventListener('click', () => {
-        const categoriaSeleccionada = boton.dataset.categoria;
+        // Menú Hamburguesa
+        document.querySelector('#menu-hamburguesa').addEventListener('click', () => {
+            document.querySelector('#menu-principal').classList.toggle('menu-abierto');
+        });
         
-        // Estética: Cambiar color del botón activo
-        botonesFiltro.forEach(b => b.style.background = "#eee");
-        boton.style.background = "#e1306c";
-        boton.style.color = "white";
-
-        // Filtrado real (puedes usar la misma lógica de ocultar tarjetas o pedir a Firebase)
-        // Para hacerlo rápido y sin recargar, ocultaremos las tarjetas:
-        const productosSnapshot = document.querySelectorAll('.tarjeta-producto');
-        // Nota: Para que esto funcione bien, tendrías que guardar la categoría 
-        // en un atributo 'data-categoria' dentro del HTML de la tarjeta al crearla.
-    });
-});
-
-
+        // Swiper Hero
+        new Swiper(".mySwiper", {
+            loop: true,
+            effect: "fade",
+            autoplay: { delay: 4000, disableOnInteraction: false },
+        });
     });
 
-    // Dark Mode e Instalación
+    // Dark Mode
     const btnDarkMode = document.querySelector('#dark-mode-toggle');
     btnDarkMode.addEventListener('click', () => {
         document.body.classList.toggle('dark-mode');
