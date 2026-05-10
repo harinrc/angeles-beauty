@@ -98,249 +98,158 @@
 
 
     <script type="module">
-    
-      // --- 1. INICIALIZACIÓN DE FIREBASE ---
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
-      
-      // Imports de Autenticación
-      import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
-      
-      // Imports de Firestore (CRUD)
-      import { 
-          getFirestore, collection, addDoc, getDocs, 
-          getDoc, doc, deleteDoc, updateDoc 
-      } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js";
-          
-      // Imports de Storage (para subir archivos)
-      import { 
-          getStorage, 
-          ref,
-          uploadBytesResumable,
-          getDownloadURL
-      } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-storage.js";
-      
-      // ¡¡MUY IMPORTANTE!!
-      // Pega aquí tu NUEVO 'firebaseConfig' del proyecto que SÍ funciona
-       const firebaseConfig = {
-    apiKey: "AIzaSyAPUPxZNuJfX3KtiI1p73AAfDgNqVo8a-g",
-    authDomain: "tienda-angeles-beauty.firebaseapp.com",
-    projectId: "tienda-angeles-beauty",
-    storageBucket: "tienda-angeles-beauty.firebasestorage.app",
-    messagingSenderId: "913588395045",
-    appId: "1:913588395045:web:ce50c2f7a296c85ecff3cc"
-  };
+    // --- 1. INICIALIZACIÓN DE FIREBASE ---
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
+    import { getFirestore, collection, addDoc, getDocs, getDoc, doc, deleteDoc, updateDoc } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js";
+    import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-storage.js";
 
-      // Inicializa TODOS los servicios
-      const app = initializeApp(firebaseConfig);
-      const auth = getAuth(app);
-      const db = getFirestore(app);
-      const storage = getStorage(app); 
+    const firebaseConfig = {
+        apiKey: "AIzaSyAPUPxZNuJfX3KtiI1p73AAfDgNqVo8a-g",
+        authDomain: "tienda-angeles-beauty.firebaseapp.com",
+        projectId: "tienda-angeles-beauty",
+        storageBucket: "tienda-angeles-beauty.firebasestorage.app",
+        messagingSenderId: "913588395045",
+        appId: "1:913588395045:web:ce50c2f7a296c85ecff3cc"
+    };
 
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+    const storage = getStorage(app); 
 
-      // --- 2. EL "GUARDIÁN DE AUTENTICACIÓN" (Auth Guard) ---
-      onAuthStateChanged(auth, (user) => {
-          if (user) {
-              console.log("Acceso permitido para:", user.email);
-              cargarProductosAdmin(); 
-          } else {
-              console.log("Acceso denegado. Redirigiendo a login...");
-              window.location.href = 'login.html';
-          }
-      });
+    onAuthStateChanged(auth, (user) => {
+        if (user) { cargarProductosAdmin(); } 
+        else { window.location.href = 'login.html'; }
+    });
 
-      // --- 3. LÓGICA PARA CERRAR SESIÓN (Logout) ---
-      const logoutButton = document.querySelector('#logout-button');
-      logoutButton.addEventListener('click', async () => {
-          await signOut(auth); 
-          window.location.href = 'login.html';
-      });
+    const logoutButton = document.querySelector('#logout-button');
+    logoutButton.addEventListener('click', async () => {
+        await signOut(auth); 
+        window.location.href = 'login.html';
+    });
 
-      // --- 4. LÓGICA DEL FORMULARIO (¡VERSIÓN FINAL!) ---
-      
-      const addForm = document.querySelector('#add-product-form');
-      const addMsg = document.querySelector('#add-message');
-      const formTitulo = document.querySelector('#form-titulo');
-      const formBotonGuardar = addForm.querySelector('button[type="submit"]');
-      const botonCancelar = document.querySelector('#boton-cancelar');
-      const campoIdOculto = document.querySelector('#prod-id');
-      const campoImagenActual = document.querySelector('#prod-imagen-actual');
-      const inputArchivo = document.querySelector('#prod-imagen');
-      const previewContainer = document.querySelector('#preview-container');
-      const previewImagen = document.querySelector('#current-image-preview');
+    // --- 4. LÓGICA DEL FORMULARIO MULTI-IMAGEN ---
+    const addForm = document.querySelector('#add-product-form');
+    const addMsg = document.querySelector('#add-message');
+    const formTitulo = document.querySelector('#form-titulo');
+    const formBotonGuardar = addForm.querySelector('button[type="submit"]');
+    const botonCancelar = document.querySelector('#boton-cancelar');
+    const campoIdOculto = document.querySelector('#prod-id');
+    const inputArchivo = document.querySelector('#prod-imagen');
+    // Habilitamos selección múltiple
+    inputArchivo.setAttribute('multiple', '');
 
-      addForm.addEventListener('submit', async (e) => {
-          e.preventDefault(); 
-          
-          const nombre = addForm['prod-nombre'].value;
-          const precio = addForm['prod-precio'].value;
-          const id = campoIdOculto.value;
-          const archivo = inputArchivo.files[0]; 
+    addForm.addEventListener('submit', async (e) => {
+        e.preventDefault(); 
+        const nombre = addForm['prod-nombre'].value;
+        const precio = addForm['prod-precio'].value;
+        const id = campoIdOculto.value;
+        const archivos = inputArchivo.files; 
 
-          formBotonGuardar.disabled = true;
-          formBotonGuardar.textContent = "Guardando...";
+        formBotonGuardar.disabled = true;
+        formBotonGuardar.textContent = "Procesando...";
 
-          try {
-              let imagenUrlFinal = campoImagenActual.value; 
+        try {
+            let listaUrlsFinal = []; 
 
-              if (archivo) {
-                  mostrarMensaje("Subiendo imagen...", "exito-texto");
-                  const storageRef = ref(storage, `productos/${Date.now()}-${archivo.name}`);
-                  const uploadTask = await uploadBytesResumable(storageRef, archivo);
-                  imagenUrlFinal = await getDownloadURL(uploadTask.ref);
-                  mostrarMensaje("¡Imagen subida! Guardando producto...", "exito-texto");
-              }
+            // Si hay archivos nuevos, los subimos todos
+            if (archivos.length > 0) {
+                mostrarMensaje(`Subiendo ${archivos.length} imágenes...`, "exito-texto");
+                
+                for (let i = 0; i < archivos.length; i++) {
+                    const archivo = archivos[i];
+                    const storageRef = ref(storage, `productos/${Date.now()}-${archivo.name}`);
+                    const uploadTask = await uploadBytesResumable(storageRef, archivo);
+                    const url = await getDownloadURL(uploadTask.ref);
+                    listaUrlsFinal.push(url);
+                }
+            } else if (id) {
+                // Si estamos editando y no subimos fotos nuevas, mantenemos las que ya estaban
+                const docRef = doc(db, 'productos', id);
+                const docSnap = await getDoc(docRef);
+                listaUrlsFinal = docSnap.data().imagenUrl;
+            }
 
-              const datosProducto = {
-                  nombre: nombre,
-                  precio: precio,
-                  imagenUrl: imagenUrlFinal 
-              };
+            const datosProducto = {
+                nombre: nombre,
+                precio: precio,
+                imagenUrl: listaUrlsFinal // Ahora es un Array []
+            };
 
-              if (id) {
-                  const productoDoc = doc(db, 'productos', id);
-                  await updateDoc(productoDoc, datosProducto);
-                  mostrarMensaje("¡Producto actualizado!", "exito-texto");
-              } else {
-                  await addDoc(collection(db, 'productos'), datosProducto);
-                  mostrarMensaje("¡Producto guardado con éxito!", "exito-texto");
-              }
-              
-              resetearFormulario(); 
-              cargarProductosAdmin(); 
+            if (id) {
+                await updateDoc(doc(db, 'productos', id), datosProducto);
+                mostrarMensaje("¡Producto actualizado!", "exito-texto");
+            } else {
+                await addDoc(collection(db, 'productos'), datosProducto);
+                mostrarMensaje("¡Producto guardado con éxito!", "exito-texto");
+            }
 
-          } catch (error) {
-              console.error("Error al guardar:", error);
-              mostrarMensaje(`Error al guardar: ${error.message}`, "error-texto");
-          } finally {
-              formBotonGuardar.disabled = false;
-              // No reseteamos aquí para que el mensaje de éxito se vea
-          }
-      });
-      
-      botonCancelar.addEventListener('click', () => {
-          resetearFormulario();
-      });
+            resetearFormulario(); 
+            cargarProductosAdmin(); 
 
-      function resetearFormulario() {
-          addForm.reset(); 
-          campoIdOculto.value = ""; 
-          campoImagenActual.value = "";
-          formTitulo.textContent = "Añadir Nuevo Producto";
-          formBotonGuardar.textContent = "Guardar Producto";
-          formBotonGuardar.disabled = false; // Asegurarse de re-habilitar
-          botonCancelar.style.display = "none";
-          previewContainer.style.display = "none"; 
-      }
+        } catch (error) {
+            console.error(error);
+            mostrarMensaje(`Error: ${error.message}`, "error-texto");
+        } finally {
+            formBotonGuardar.disabled = false;
+            formBotonGuardar.textContent = "Guardar Producto";
+        }
+    });
 
-      function mostrarMensaje(texto, clase) {
-          addMsg.textContent = texto;
-          addMsg.className = (clase === "exito-texto") ? "exito-texto" : "error-texto";
-          
-          if (clase === "exito-texto") {
-              setTimeout(() => { 
-                  addMsg.textContent = ""; 
-                  resetearFormulario(); // Resetear el formulario DESPUÉS de ver el mensaje
-              }, 3000);
-          }
-      }
+    // --- RESTO DE FUNCIONES (Cargar, Editar, Eliminar) ---
+    async function cargarProductosAdmin() {
+        const listaContainer = document.querySelector('#lista-productos-container');
+        if (!listaContainer) return;
+        listaContainer.innerHTML = "<p>Cargando lista...</p>";
+        try {
+            const productosSnapshot = await getDocs(collection(db, 'productos'));
+            let html = "";
+            productosSnapshot.forEach(doc => {
+                const p = doc.data();
+                html += `
+                    <div class="producto-item-admin">
+                        <span>${p.nombre} (${Array.isArray(p.imagenUrl) ? p.imagenUrl.length : 1} fotos)</span>
+                        <div class="botones-admin">
+                            <button class="boton-admin-editar" onclick="prepararEdicion('${doc.id}')">Editar</button>
+                            <button class="boton-admin-eliminar" onclick="eliminarProducto('${doc.id}')">Eliminar</button>
+                        </div>
+                    </div>`;
+            });
+            listaContainer.innerHTML = html;
+        } catch (e) { console.error(e); }
+    }
 
-      // --- 5. LÓGICA PARA LEER Y MOSTRAR LA LISTA DE PRODUCTOS ---
-      const listaContainer = document.querySelector('#lista-productos-container');
+    window.eliminarProducto = async (id) => {
+        if (confirm("¿Eliminar producto?")) {
+            await deleteDoc(doc(db, 'productos', id));
+            cargarProductosAdmin();
+        }
+    }
 
-      async function cargarProductosAdmin() {
-          if (!listaContainer) return; 
-          listaContainer.innerHTML = "<p>Cargando lista de productos...</p>";
-          let html = ""; 
+    window.prepararEdicion = async (id) => {
+        const docSnap = await getDoc(doc(db, 'productos', id));
+        const p = docSnap.data();
+        addForm['prod-nombre'].value = p.nombre;
+        addForm['prod-precio'].value = p.precio;
+        campoIdOculto.value = id;
+        formTitulo.textContent = "Editando Producto";
+        botonCancelar.style.display = "block";
+        window.scrollTo(0,0);
+    }
 
-          try {
-              const productosSnapshot = await getDocs(collection(db, 'productos'));
-              if (productosSnapshot.empty) {
-                  listaContainer.innerHTML = "<p>No hay productos en la base de datos.</p>";
-                  return;
-              }
+    function resetearFormulario() {
+        addForm.reset();
+        campoIdOculto.value = "";
+        formTitulo.textContent = "Añadir Nuevo Producto";
+        botonCancelar.style.display = "none";
+    }
 
-              productosSnapshot.forEach(doc => {
-                  const producto = doc.data();
-                  const id = doc.id; 
-                  html += `
-                      <div class="producto-item-admin">
-                          <span>${producto.nombre}</span>
-                          <div class="botones-admin">
-                              <button class="boton-admin-editar" data-id="${id}">Editar</button>
-                              <button class="boton-admin-eliminar" data-id="${id}">Eliminar</button>
-                          </div>
-                      </div>
-                  `;
-              });
-              listaContainer.innerHTML = html; 
+    function mostrarMensaje(texto, clase) {
+        addMsg.textContent = texto;
+        addMsg.className = clase;
+        setTimeout(() => { addMsg.textContent = ""; }, 3000);
+    }
 
-              // --- 6. AÑADIR LOS "ESCUCHADORES" A LOS BOTONES ---
-              
-              document.querySelectorAll('.boton-admin-eliminar').forEach(button => {
-                  button.addEventListener('click', async (e) => {
-                      const id = e.target.dataset.id; 
-                      if (confirm("¿Estás seguro de que quieres eliminar este producto?")) {
-                          await eliminarProducto(id);
-                      }
-                  });
-              });
-
-              document.querySelectorAll('.boton-admin-editar').forEach(button => {
-                  button.addEventListener('click', (e) => {
-                      const id = e.target.dataset.id; 
-                      prepararEdicion(id); 
-                  });
-              });
-
-          } catch (error) {
-              console.error("Error al cargar la lista de productos:", error);
-              listaContainer.innerHTML = "<p>Error al cargar la lista.</p>";
-          }
-      }
-
-      // --- 7. FUNCIÓN PARA ELIMINAR UN PRODUCTO (Firestore) ---
-      async function eliminarProducto(id) {
-          try {
-              await deleteDoc(doc(db, 'productos', id));
-              // (Nota: Esto no borra la imagen de Storage, se quedan ahí)
-              cargarProductosAdmin(); 
-          } catch (error) {
-              console.error("Error al eliminar el producto:", error);
-              alert("Error al eliminar el producto.");
-          }
-      }
-
-      // --- 8. FUNCIÓN PARA PREPARAR LA EDICIÓN (¡ACTUALIZADA!) ---
-      async function prepararEdicion(id) {
-          try {
-              const productoDocRef = doc(db, 'productos', id);
-              const productoSnap = await getDoc(productoDocRef);
-              if (!productoSnap.exists()) return;
-              
-              const producto = productoSnap.data();
-
-              formTitulo.textContent = `Editando: ${producto.nombre}`;
-              addForm['prod-nombre'].value = producto.nombre;
-              addForm['prod-precio'].value = producto.precio;
-              campoIdOculto.value = id; 
-
-              if (producto.imagenUrl) {
-                  previewImagen.src = producto.imagenUrl;
-                  campoImagenActual.value = producto.imagenUrl; 
-                  previewContainer.style.display = "block";
-              }
-              
-              formBotonGuardar.textContent = "Actualizar Producto";
-              botonCancelar.style.display = "inline-block"; // ¡Mostrarlo!
-
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-
-          } catch (error) {
-              console.error("Error al preparar la edición:", error);
-          }
-      }
-
-    </script>
-
-</body>
-</html>
+    botonCancelar.addEventListener('click', resetearFormulario);
+</script>
