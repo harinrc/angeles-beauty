@@ -181,11 +181,18 @@
                 listaUrlsFinal = docSnap.data().imagenUrl;
             }
 
+            // 1. Obtener el elemento del DOM
+            const selectCategoria = document.querySelector('#prod-categoria');
+
+
+            const categoria = selectCategoria ? selectCategoria.value : "Sin categoría";
+
+
             const datosProducto = {
-                nombre: nombre,
-                precio: precio,
-                categoria: categoria,
-                imagenUrl: listaUrlsFinal // Ahora es un Array []
+            nombre: nombre,
+            precio: precio,
+            categoria: categoria, 
+            imagenUrl: listaUrlsFinal
             };
 
             if (id) {
