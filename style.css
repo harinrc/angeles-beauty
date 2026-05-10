@@ -642,3 +642,70 @@ footer {
     /* Esto hará que el cambio de imagen sea más fluido */
     transition-timing-function: ease-in-out;
 }
+
+/* --- Ajustes para la sección Quiénes Somos / Contacto --- */
+.contacto-flex {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px;
+    width: 100%;
+    max-width: 1100px;
+    margin: 40px auto; 
+    padding: 0 20px;
+}
+
+.contacto-info, .contacto-mapa {
+    flex: 1;
+    min-width: 300px;
+    text-align: center; /* Centra títulos h3 */
+}
+
+.social-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra los botones horizontalmente */
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.btn-social {
+    width: 100%;
+    max-width: 320px; /* Tamaño ideal para móvil y desktop */
+    padding: 12px;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+}
+
+.btn-social:hover {
+    transform: scale(1.05);
+}
+
+/* Ajuste específico para el Mapa */
+.contacto-mapa iframe {
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+/* Responsivo para pantallas pequeñas */
+@media (max-width: 768px) {
+    .contacto-flex {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .contacto-info {
+        order: 1; /* Redes sociales primero */
+    }
+    
+    .contacto-mapa {
+        order: 2; /* Mapa después */
+        width: 100%;
+    }
+}
