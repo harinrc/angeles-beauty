@@ -124,24 +124,32 @@
 
     // --- FUNCION DE FILTRADO COMBINADO ---
     function aplicarFiltros() {
-        const texto = document.querySelector('#input-buscador').value.toLowerCase();
-        // Buscamos el botón que tiene el fondo rosa (el activo)
-        const btnActivo = Array.from(document.querySelectorAll('.btn-filtro')).find(b => b.style.backgroundColor === 'rgb(225, 48, 108)' || b.style.background.includes('rgb(225, 48, 108)'));
-        const categoriaSeleccionada = btnActivo ? btnActivo.dataset.categoria : "todos";
+    const texto = document.querySelector('#input-buscador').value.toLowerCase();
+    const btnActivo = Array.from(document.querySelectorAll('.btn-filtro')).find(b => 
+        b.style.backgroundColor === 'rgb(225, 48, 108)' || b.style.background.includes('rgb(225, 48, 108)')
+    );
+    const categoriaSeleccionada = btnActivo ? btnActivo.dataset.categoria : "todos";
 
-        const tarjetas = document.querySelectorAll('.tarjeta-producto');
+    const tarjetas = document.querySelectorAll('.tarjeta-producto');
 
-        tarjetas.forEach(tarjeta => {
-            const nombre = tarjeta.querySelector('h3').textContent.toLowerCase();
-            const categoriaTarjeta = tarjeta.dataset.categoria;
+    tarjetas.forEach(tarjeta => {
+        const nombre = tarjeta.querySelector('h3').textContent.toLowerCase();
+        const categoriaTarjeta = tarjeta.dataset.categoria;
 
-            const coincideNombre = nombre.includes(texto);
-            const coincideCategoria = (categoriaSeleccionada === "todos" || categoriaTarjeta === categoriaSeleccionada);
+        const coincideNombre = nombre.includes(texto);
+        const coincideCategoria = (categoriaSeleccionada === "todos" || categoriaTarjeta === categoriaSeleccionada);
 
-            tarjeta.style.display = (coincideNombre && coincideCategoria) ? "block" : "none";
-        });
-    }
-
+        if (coincideNombre && coincideCategoria) {
+            tarjeta.style.display = "block";
+            
+            if (tarjeta.querySelector('.swiper-tarjeta').swiper) {
+                tarjeta.querySelector('.swiper-tarjeta').swiper.update();
+            }
+        } else {
+            tarjeta.style.display = "none";
+        }
+    });
+}
     async function cargarProductos() {
         const galeria = document.querySelector('.galeria-productos');
         try {
