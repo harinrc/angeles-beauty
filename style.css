@@ -637,3 +637,8 @@ footer {
 .swiper-pagination-bullet-active {
     background: #e1306c !important;
 }
+
+.swiper-tarjeta {
+    /* Esto hará que el cambio de imagen sea más fluido */
+    transition-timing-function: ease-in-out;
+}

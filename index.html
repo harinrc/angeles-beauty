@@ -200,6 +200,10 @@
                     // Inicializamos Swiper para esta tarjeta
                     new Swiper(tarjeta.querySelector('.swiper-tarjeta'), {
                         loop: imagenes.length > 1,
+                        autoplay: {
+                        delay: 3000, // Cambia cada 3 segundos
+                        disableOnInteraction: false, // Sigue rotando aunque el usuario lo toque
+                        },
                         pagination: { el: ".swiper-pagination", clickable: true },
                         navigation: {
                             nextEl: tarjeta.querySelector('.swiper-button-next'),
