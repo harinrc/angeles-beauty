@@ -142,9 +142,15 @@
         if (coincideNombre && coincideCategoria) {
             tarjeta.style.display = "block";
             
-            if (tarjeta.querySelector('.swiper-tarjeta').swiper) {
-                tarjeta.querySelector('.swiper-tarjeta').swiper.update();
-            }
+            // Usamos un pequeño retraso para que el navegador "renderice" el block primero
+            setTimeout(() => {
+                const swiperEl = tarjeta.querySelector('.swiper-tarjeta');
+                if (swiperEl && swiperEl.swiper) {
+                    swiperEl.swiper.update(); // Actualiza medidas
+                    swiperEl.swiper.slideTo(0, 0); // Regresa a la primera foto
+                    swiperEl.swiper.autoplay.start(); // Reinicia el autoplay
+                }
+            }, 50); 
         } else {
             tarjeta.style.display = "none";
         }
