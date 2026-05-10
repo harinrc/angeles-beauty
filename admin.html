@@ -44,6 +44,16 @@
                 </div>
             </div>
 
+            <div class="form-group">
+    <label for="prod-categoria">Categoría:</label>
+    <select id="prod-categoria" style="width: 100%; padding: 10px; border-radius: 5px;">
+        <option value="Maquillaje">Maquillaje</option>
+        <option value="Joyería">Joyería</option>
+        <option value="Skin Care">Skin Care</option>
+        <option value="Otros">Otros</option>
+    </select>
+</div>
+
             <button type="submit" class="btn-whatsapp" style="width: 100%; border:none; cursor:pointer;">Guardar Producto</button>
 
             <button type="button" id="boton-cancelar" class="boton-admin-editar" style="background-color: #777; display: none; margin-top: 10px; width: 100%; border:none; padding:10px; border-radius:5px; color:white; font-weight:bold;">Cancelar Edición</button>
@@ -174,6 +184,7 @@
             const datosProducto = {
                 nombre: nombre,
                 precio: precio,
+                categoria: categoria,
                 imagenUrl: listaUrlsFinal // Ahora es un Array []
             };
 
