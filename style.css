@@ -8,6 +8,10 @@
     --text-color: #333333; /* Texto oscuro para que se vea */
 }
 
+html {
+    font-size: clamp(14px, 1vw, 18px);
+}
+
 body.dark-mode {
     /* MODO OSCURO */
     --bg-color: #121212;
@@ -232,30 +236,176 @@ footer {
 .tiktok-icon:hover { color: #ff0050; transform: scale(1.2); }
 
 /* --- 6. Admin y Login --- */
-.admin-container, .login-form {
+.login-container,
+.admin-container {
     background-color: var(--card-bg);
     color: var(--text-color);
-    width: 95%;
-    max-width: 500px;
-    margin: 40px auto;
-    background: white;
+    width: min(98%, 1100px);
+    margin: 20px auto 40px;
     padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    border-radius: 18px;
+    box-shadow: 0 12px 35px rgba(0,0,0,0.12);
 }
 
-.producto-item-admin {
+.login-form,
+.admin-form {
+    width: 100%;
+    display: grid;
+    gap: 18px;
+}
+
+.login-form h2,
+.admin-form h2 {
+    color: #e1306c;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    margin: 0;
+}
+
+.admin-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 0;
-    border-bottom: 1px solid #eee;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.admin-header .logo-texto {
+    margin: 0;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+}
+
+.form-group {
+    display: grid;
+    gap: 8px;
+}
+
+.form-group label {
+    font-weight: 700;
+    color: #333;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 14px 16px;
+    font-size: 1rem;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    background: #fff;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #e1306c;
+    box-shadow: 0 0 0 4px rgba(225, 48, 108, 0.12);
+}
+
+.login-form .btn-whatsapp,
+.admin-form .btn-whatsapp,
+#boton-cancelar,
+.boton-admin-editar,
+.boton-admin-eliminar {
+    width: 100%;
+    border-radius: 14px;
+    font-weight: 700;
+    padding: 14px 18px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.login-form .btn-whatsapp,
+.admin-form .btn-whatsapp {
+    background-color: #e1306c;
+    color: #fff !important;
+}
+
+.login-form .btn-whatsapp:hover,
+.admin-form .btn-whatsapp:hover,
+.boton-admin-editar:hover,
+.boton-admin-eliminar:hover,
+#boton-cancelar:hover {
+    transform: translateY(-1px);
+}
+
+#boton-cancelar {
+    background-color: #777;
+    color: #fff;
+    border: none;
+}
+
+.lista-productos-admin {
+    margin-top: 30px;
+}
+
+.lista-productos-admin h2 {
+    color: #e1306c;
+    margin-bottom: 18px;
+    font-size: clamp(1.4rem, 3vw, 1.8rem);
+}
+
+#lista-productos-container {
+    display: grid;
+    gap: 16px;
+}
+
+.producto-item-admin {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 20px;
+    border-radius: 16px;
+    background: #fff;
+    border: 1px solid rgba(0,0,0,0.06);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+}
+
+.producto-item-admin span {
+    font-weight: 600;
+    color: #333;
+}
+
+.botones-admin {
+    display: flex;
     gap: 10px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.boton-admin-editar,
+.boton-admin-eliminar {
+    border: none;
+    cursor: pointer;
+    min-width: 110px;
+}
+
+.boton-admin-editar {
+    background-color: #e1306c;
+    color: #fff;
+}
+
+.boton-admin-eliminar {
+    background-color: #333;
+    color: #fff;
+}
+
+.error-texto {
+    color: #d9534f;
+    font-weight: 700;
+}
+
+.exito-texto {
+    color: #28a745;
+    font-weight: 700;
 }
 
 /* --- 7. MEDIA QUERIES (RESPONSIVE FINAL) --- */
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
     body { padding-top: 70px; }
     
     .menu-hamburguesa { display: block; }
@@ -276,19 +426,59 @@ footer {
     
     nav li { margin: 10px 0; }
 
-    .hero-container { height: 60vh; }
-    
-    .producto-item-admin {
-        flex-direction: column;
-        text-align: center;
+    .hero-container { height: 55vh; }
+    .hero-overlay h1 { font-size: clamp(1.8rem, 8vw, 3.6rem); }
+    .hero-overlay p { font-size: clamp(0.95rem, 3vw, 1.2rem); }
+
+    .login-container,
+    .admin-container {
+        margin: 16px auto 30px;
+        padding: 24px;
     }
+
+    .login-form,
+    .admin-form {
+        gap: 14px;
+    }
+
+    .producto-item-admin {
+        grid-template-columns: 1fr;
+        text-align: left;
+    }
+
+    .botones-admin {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-container { height: 50vh; }
+    .galeria-productos { padding: 30px 15px; gap: 18px; }
+    .tarjeta-producto { max-width: 100%; }
+    .contacto-flex { flex-direction: column; align-items: stretch; }
+    .social-links { width: 100%; }
+    .footer-content { flex-direction: column; gap: 25px; }
 }
 
 /* Ajuste extremo para pantallas de 320dp */
 @media (max-width: 320px) {
-    .hero-overlay h1 { font-size: 1.6rem; }
+    .hero-overlay h1 { font-size: 1.5rem; }
     .hero-overlay p { font-size: 0.85rem; }
-    .btn-whatsapp { padding: 10px 20px; font-size: 14px; }
+    .btn-whatsapp { padding: 10px 18px; font-size: 13px; }
+    .login-container,
+    .admin-container { padding: 20px; }
+    .admin-header { gap: 12px; }
+    .form-group input,
+    .form-group select { padding: 12px 14px; }
+}
+
+@media (min-width: 1920px) {
+    body { font-size: 1.05rem; }
+    .hero-container { height: 85vh; }
+    .galeria-productos { gap: 36px; padding: 55px 40px; }
+    .tarjeta-producto { max-width: 340px; }
+    .contacto-flex { max-width: 1400px; gap: 50px; }
+    .footer-content { max-width: 1400px; }
 }
 
 <!--Quienes somos-->
