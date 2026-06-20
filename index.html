@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ángeles Beauty - Productos Exclusivos - Managua, Nicaragua</title>
+    <meta name="theme-color" content="#e1306c">
     <link rel="icon" href="favicon.png" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
@@ -22,7 +23,7 @@
 
 <header>
     <h1 class="logo-texto">Ángeles Beauty</h1> 
-    <button id="menu-hamburguesa" class="menu-hamburguesa" aria-label="Abrir menú">&#9776;</button>
+    <button id="menu-hamburguesa" class="menu-hamburguesa" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu-principal">&#9776;</button>
     <button id="dark-mode-toggle" style="background:none; border:none; cursor:pointer; font-size:1.5rem;">🌙</button>
     <nav id="menu-principal">
         <ul>
@@ -242,8 +243,36 @@
             window.scrollY > 50 ? header.classList.add('header-scrolled') : header.classList.remove('header-scrolled');
         });
 
-        document.querySelector('#menu-hamburguesa').addEventListener('click', () => {
-            document.querySelector('#menu-principal').classList.toggle('menu-abierto');
+        const botonMenu = document.querySelector('#menu-hamburguesa');
+        const menuPrincipal = document.querySelector('#menu-principal');
+
+        botonMenu.addEventListener('click', () => {
+            const abierto = menuPrincipal.classList.toggle('menu-abierto');
+            botonMenu.setAttribute('aria-expanded', String(abierto));
+        });
+
+        menuPrincipal.querySelectorAll('a').forEach((link) => {
+            link.addEventListener('click', () => {
+                menuPrincipal.classList.remove('menu-abierto');
+                botonMenu.setAttribute('aria-expanded', 'false');
+            });
+        });
+
+        document.addEventListener('click', (event) => {
+            const clickDentroMenu = menuPrincipal.contains(event.target);
+            const clickEnBoton = botonMenu.contains(event.target);
+
+            if (!clickDentroMenu && !clickEnBoton && menuPrincipal.classList.contains('menu-abierto')) {
+                menuPrincipal.classList.remove('menu-abierto');
+                botonMenu.setAttribute('aria-expanded', 'false');
+            }
+        });
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 1024 && menuPrincipal.classList.contains('menu-abierto')) {
+                menuPrincipal.classList.remove('menu-abierto');
+                botonMenu.setAttribute('aria-expanded', 'false');
+            }
         });
 
         new Swiper(".mySwiper", {
@@ -259,7 +288,16 @@
         btnDarkMode.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
     });
 
-    if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js'); }
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', async () => {
+            try {
+                await navigator.serviceWorker.register('./sw.js', { scope: './' });
+                console.log('Service Worker registrado correctamente.');
+            } catch (error) {
+                console.error('Error al registrar Service Worker:', error);
+            }
+        });
+    }
 </script>
 </body>
 </html>

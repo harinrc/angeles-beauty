@@ -94,6 +94,22 @@ nav a:hover {
     cursor: pointer;
 }
 
+#dark-mode-toggle {
+    color: #d13885;
+    border-radius: 999px;
+    width: 44px;
+    height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.25s ease, transform 0.25s ease;
+}
+
+#dark-mode-toggle:hover {
+    background-color: rgba(225, 48, 108, 0.12);
+    transform: translateY(-1px);
+}
+
 /* --- 3. Sección Hero (Carrusel y Texto) --- */
 .hero-container {
     position: relative;
@@ -407,24 +423,68 @@ footer {
 
 @media (max-width: 1024px) {
     body { padding-top: 70px; }
+
+    header {
+        padding: 10px 14px;
+    }
+
+    h1.logo-texto {
+        font-size: clamp(1.8rem, 8vw, 2.6rem);
+    }
     
-    .menu-hamburguesa { display: block; }
+    .menu-hamburguesa {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        background: rgba(225, 48, 108, 0.12);
+        border: 1px solid rgba(225, 48, 108, 0.2);
+        font-size: 1.7rem;
+        line-height: 1;
+    }
+
+    .menu-hamburguesa:hover {
+        background: rgba(225, 48, 108, 0.18);
+    }
     
     #menu-principal {
         display: none;
         position: absolute;
-        top: 70px;
-        left: 0;
-        width: 100%;
-        background-color: white;
-        flex-direction: column;
-        padding: 20px 0;
-        box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        top: calc(100% + 10px);
+        left: 12px;
+        right: 12px;
+        width: auto;
+        background-color: #ffffff;
+        border-radius: 16px;
+        padding: 10px;
+        box-shadow: 0 14px 28px rgba(0,0,0,0.12);
+        border: 1px solid rgba(225, 48, 108, 0.12);
     }
 
-    #menu-principal.menu-abierto { display: flex; }
+    #menu-principal.menu-abierto { display: block; }
+
+    #menu-principal ul {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
     
-    nav li { margin: 10px 0; }
+    nav li { margin: 0; }
+
+    nav a {
+        display: block;
+        width: 100%;
+        padding: 12px 14px;
+        border-radius: 10px;
+        text-align: center;
+    }
+
+    nav a:hover {
+        background-color: rgba(225, 48, 108, 0.12);
+    }
 
     .hero-container { height: 55vh; }
     .hero-overlay h1 { font-size: clamp(1.8rem, 8vw, 3.6rem); }
@@ -458,6 +518,11 @@ footer {
     .contacto-flex { flex-direction: column; align-items: stretch; }
     .social-links { width: 100%; }
     .footer-content { flex-direction: column; gap: 25px; }
+
+    #menu-principal {
+        left: 10px;
+        right: 10px;
+    }
 }
 
 /* Ajuste extremo para pantallas de 320dp */
